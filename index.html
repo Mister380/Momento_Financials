@@ -6,7 +6,17 @@
     <title>Momento Financial Model</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <style>
+        .chart-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-style: italic;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -98,6 +108,7 @@
                 </div>
                 <div class="chart-container">
                     <canvas id="overviewChart"></canvas>
+                    <div class="chart-loading">Loading chart...</div>
                     <p class="chart-caption">Revenue growth projection over 3 years</p>
                 </div>
             </div>
@@ -175,6 +186,7 @@
                         <h4>Estimated Tickets Sold</h4>
                         <div class="chart-container">
                             <canvas id="ticketsChart"></canvas>
+                            <div class="chart-loading">Loading chart...</div>
                         </div>
                         <div class="ticket-stats">
                             <div class="stat">
