@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momento Financial Model</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Momento</h1>
+                <p class="tagline">Cultural Event Discovery & Booking App</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#revenue">Revenue</a></li>
+                    <li><a href="#users">User Growth</a></li>
+                    <li><a href="#costs">Costs</a></li>
+                    <li><a href="#funding">Funding</a></li>
+                    <li><a href="#kpis">KPIs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>Financial Model & Economic Plan</h2>
+            <p>A comprehensive 3-year projection demonstrating Momento's financial viability and growth potential</p>
+            <div class="key-metrics">
+                <div class="metric">
+                    <span class="number">€580K+</span>
+                    <span class="label">Year 3 Revenue</span>
+                </div>
+                <div class="metric">
+                    <span class="number">40K</span>
+                    <span class="label">Year 3 Active Users</span>
+                </div>
+                <div class="metric">
+                    <span class="number">4.9</span>
+                    <span class="label">Year 3 CLV:CAC Ratio</span>
+                </div>
+                <div class="metric">
+                    <span class="number">Month 32</span>
+                    <span class="label">Break-Even Point</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="section-light">
+        <div class="container">
+            <h2>Executive Overview</h2>
+            <div class="two-column">
+                <div>
+                    <p class="lead">Momento is designed to simplify how busy professionals, cultural enthusiasts, and social groups discover, schedule, and book cultural events.</p>
+                    <p>This financial model demonstrates the economic viability of the Momento project over a 3-year period, with detailed projections for revenue, costs, cash flow, and key financial metrics.</p>
+                    <div class="model-summary">
+                        <h3>Key Projections</h3>
+                        <table class="summary-table">
+                            <tr>
+                                <th>Metric</th>
+                                <th>Year 1</th>
+                                <th>Year 2</th>
+                                <th>Year 3</th>
+                            </tr>
+                            <tr>
+                                <td>Total Revenue</td>
+                                <td>€23,126</td>
+                                <td>€172,375</td>
+                                <td>€580,250</td>
+                            </tr>
+                            <tr>
+                                <td>Total Costs</td>
+                                <td>€734,000</td>
+                                <td>€1,040,000</td>
+                                <td>€1,733,000</td>
+                            </tr>
+                            <tr>
+                                <td>Net Cash Flow</td>
+                                <td>-€710,874</td>
+                                <td>-€867,625</td>
+                                <td>-€1,152,750</td>
+                            </tr>
+                            <tr>
+                                <td>Active Users</td>
+                                <td>2,000</td>
+                                <td>12,500</td>
+                                <td>40,000</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="overviewChart"></canvas>
+                    <p class="chart-caption">Revenue growth projection over 3 years</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="revenue" class="section-dark">
+        <div class="container">
+            <h2>Revenue Streams</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Subscription Model (Three-Tier)</h3>
+                    <div class="subscription-tiers">
+                        <div class="tier">
+                            <h4>Freemium</h4>
+                            <div class="price">Free</div>
+                            <ul>
+                                <li>Limited recommendations (3/week)</li>
+                                <li>Basic calendar reminders</li>
+                            </ul>
+                            <div class="conversion">
+                                <span>Year 1: 90%</span>
+                                <span>Year 3: 80%</span>
+                            </div>
+                        </div>
+                        <div class="tier">
+                            <h4>Standard Premium</h4>
+                            <div class="price">€4.99/month</div>
+                            <ul>
+                                <li>Unlimited recommendations</li>
+                                <li>Enhanced calendar sync</li>
+                                <li>Group planning tools</li>
+                            </ul>
+                            <div class="conversion">
+                                <span>Year 1: 8%</span>
+                                <span>Year 3: 15%</span>
+                            </div>
+                        </div>
+                        <div class="tier">
+                            <h4>VIP/Elite Premium</h4>
+                            <div class="price">€9.99/month</div>
+                            <ul>
+                                <li>All Standard features</li>
+                                <li>Exclusive early ticket access</li>
+                                <li>Discounts on events</li>
+                                <li>Advanced AI insights</li>
+                                <li>Priority support</li>
+                            </ul>
+                            <div class="conversion">
+                                <span>Year 1: 2%</span>
+                                <span>Year 3: 5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Event Organizer Commission</h3>
+                    <div class="commission-details">
+                        <div class="commission-item">
+                            <span class="label">Commission Rate</span>
+                            <span class="value">7%</span>
+                            <span class="note">on each ticket sold through the app</span>
+                        </div>
+                        <div class="commission-item">
+                            <span class="label">Trial Period</span>
+                            <span class="value">1 month</span>
+                            <span class="note">free trial for event organizers</span>
+                        </div>
+                        <div class="commission-item">
+                            <span class="label">Average Ticket Price</span>
+                            <span class="value">€35</span>
+                        </div>
+                    </div>
+                    <div class="ticket-projections">
+                        <h4>Estimated Tickets Sold</h4>
+                        <div class="chart-container">
+                            <canvas id="ticketsChart"></canvas>
+                        </div>
+                        <div class="ticket-stats">
+                            <div class="stat">
+                                <span class="value">5,000</span>
+                                <span class="period">Year 1</span>
+                            </div>
+                            <div class="stat">
+                                <span class="value">25,000</span>
+                                <span class="period">Year 2</span>
+                            </div>
+                            <div class="stat">
+                                <span class="value">75,000</span>
+                                <span class="period">Year 3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="users" class="section-light">
+        <div class="container">
+            <h2>User Growth & Conversion</h2>
+            <div class="two-column">
+                <div class="chart-container">
+                    <canvas id="userGrowthChart"></canvas>
+                    <p class="chart-caption">User growth projection over 3 years</p>
+                </div>
+                <div>
+                    <h3>User Acquisition</h3>
+                    <table class="data-table">
+                        <tr>
+                            <th>Metric</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                        </tr>
+                        <tr>
+                            <td>App Downloads</td>
+                            <td>10,000</td>
+                            <td>50,000</td>
+                            <td>150,000</td>
+                        </tr>
+                        <tr>
+                            <td>Active Users</td>
+                            <td>2,000</td>
+                            <td>12,500</td>
+                            <td>40,000</td>
+                        </tr>
+                        <tr>
+                            <td>User Retention Rate</td>
+                            <td>60%</td>
+                            <td>70%</td>
+                            <td>75%</td>
+                        </tr>
+                        <tr>
+                            <td>Monthly User Growth</td>
+                            <td>15%</td>
+                            <td>20%</td>
+                            <td>15%</td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Conversion Metrics</h3>
+                    <table class="data-table">
+                        <tr>
+                            <th>Metric</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                        </tr>
+                        <tr>
+                            <td>Freemium to Paid Conversion</td>
+                            <td>10%</td>
+                            <td>15%</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Average Revenue Per User (ARPU)</td>
+                            <td>€0.85</td>
+                            <td>€1.15</td>
+                            <td>€1.45</td>
+                        </tr>
+                        <tr>
+                            <td>Customer Acquisition Cost (CAC)</td>
+                            <td>€8.00</td>
+                            <td>€7.00</td>
+                            <td>€6.50</td>
+                        </tr>
+                        <tr>
+                            <td>Customer Lifetime Value (CLV)</td>
+                            <td>€15.00</td>
+                            <td>€24.00</td>
+                            <td>€32.00</td>
+                        </tr>
+                        <tr>
+                            <td>CLV:CAC Ratio</td>
+                            <td>1.9</td>
+                            <td>3.4</td>
+                            <td>4.9</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="user-funnel">
+                <h3>User Acquisition Funnel</h3>
+                <div class="funnel-chart">
+                    <div class="funnel-step" style="width: 100%;">
+                        <span class="step-name">App Downloads</span>
+                        <span class="step-value">150,000</span>
+                    </div>
+                    <div class="funnel-step" style="width: 80%;">
+                        <span class="step-name">App Installs</span>
+                        <span class="step-value">120,000</span>
+                    </div>
+                    <div class="funnel-step" style="width: 50%;">
+                        <span class="step-name">Sign-ups</span>
+                        <span class="step-value">75,000</span>
+                    </div>
+                    <div class="funnel-step" style="width: 27%;">
+                        <span class="step-name">Active Users</span>
+                        <span class="step-value">40,000</span>
+                    </div>
+                    <div class="funnel-step" style="width: 5%;">
+                        <span class="step-name">Paid Subscribers</span>
+                        <span class="step-value">8,000</span>
+                    </div>
+                </div>
+                <p class="chart-caption">Year 3 user acquisition funnel</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="costs" class="section-dark">
+        <div class="container">
+            <h2>Cost Structure</h2>
+            <div class="cost-overview">
+                <div class="cost-chart-container">
+                    <canvas id="costBreakdownChart"></canvas>
+                    <p class="chart-caption">Cost breakdown by category (Year 1)</p>
+                </div>
+                <div class="cost-summary">
+                    <h3>3-Year Cost Projection</h3>
+                    <table class="data-table">
+                        <tr>
+                            <th>Category</th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                        </tr>
+                        <tr>
+                            <td>Development & Technical</td>
+                            <td>€295,000</td>
+                            <td>€199,000</td>
+                            <td>€298,000</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing & User Acquisition</td>
+                            <td>€170,000</td>
+                            <td>€340,000</td>
+                            <td>€570,000</td>
+                        </tr>
+                        <tr>
+                            <td>Operational Overheads</td>
+                            <td>€269,000</td>
+                            <td>€501,000</td>
+                            <td>€865,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Costs</strong></td>
+                            <td><strong>€734,000</strong></td>
+                            <td><strong>€1,040,000</strong></td>
+                            <td><strong>€1,733,000</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cost-categories">
+                <div class="cost-category">
+                    <h3>Development & Technical</h3>
+                    <ul>
+                        <li>Initial Development: €200,000 (Y1), €50,000 (Y2), €75,000 (Y3)</li>
+                        <li>Ongoing Maintenance: €60,000 (Y1), €90,000 (Y2), €120,000 (Y3)</li>
+                        <li>Server & Hosting: €12,000 (Y1), €24,000 (Y2), €48,000 (Y3)</li>
+                        <li>API Integrations: €15,000 (Y1), €20,000 (Y2), €30,000 (Y3)</li>
+                        <li>Data Storage & Processing: €8,000 (Y1), €15,000 (Y2), €25,000 (Y3)</li>
+                    </ul>
+                </div>
+                <div class="cost-category">
+                    <h3>Marketing & User Acquisition</h3>
+                    <ul>
+                        <li>Digital Advertising: €80,000 (Y1), €150,000 (Y2), €250,000 (Y3)</li>
+                        <li>Influencer Partnerships: €30,000 (Y1), €60,000 (Y2), €100,000 (Y3)</li>
+                        <li>Referral Programs: €15,000 (Y1), €40,000 (Y2), €80,000 (Y3)</li>
+                        <li>PR & Content Marketing: €25,000 (Y1), €40,000 (Y2), €60,000 (Y3)</li>
+                        <li>Events & Sponsorships: €20,000 (Y1), €50,000 (Y2), €80,000 (Y3)</li>
+                    </ul>
+                </div>
+                <div class="cost-category">
+                    <h3>Operational Overheads</h3>
+                    <ul>
+                        <li>Salaries & Benefits: €180,000 (Y1), €350,000 (Y2), €600,000 (Y3)</li>
+                        <li>Office & Utilities: €24,000 (Y1), €36,000 (Y2), €60,000 (Y3)</li>
+                        <li>Customer Support: €30,000 (Y1), €60,000 (Y2), €120,000 (Y3)</li>
+                        <li>Administrative & Legal: €20,000 (Y1), €30,000 (Y2), €45,000 (Y3)</li>
+                        <li>Insurance & Compliance: €15,000 (Y1), €25,000 (Y2), €40,000 (Y3)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="funding" class="section-light">
+        <div class="container">
+            <h2>Funding Requirements</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Pre-Seed Round: €750,000</h3>
+                    <div class="funding-allocation">
+                        <canvas id="preSeedChart"></canvas>
+                        <div class="allocation-list">
+                            <div class="allocation-item">
+                                <span class="category">MVP Development</span>
+                                <span class="amount">€200,000</span>
+                            </div>
+                            <div class="allocation-item">
+                                <span class="category">Marketing & User Acquisition</span>
+                                <span class="amount">€170,000</span>
+                            </div>
+                            <div class="allocation-item">
+                                <span class="category">Operations (12 months)</span>
+                                <span class="amount">€350,000</span>
+                            </div>
+                            <div class="allocation-item">
+                                <span class="category">Buffer</span>
+                                <span class="amount">€30,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Series A Round: €2,000,000</h3>
+                    <div class="funding-allocation">
+                        <canvas id="seriesAChart"></canvas>
+                        <div class="allocation-list">
+                            <div class="allocation-item">
+                                <span class="category">Product Enhancement</span>
+                                <span class="amount">€400,000</span>
+                            </div>
+                            <div class="allocation-item">
+                                <span class="category">Marketing & Expansion</span>
+                                <span class="amount">€600,000</span>
+                            </div>
+                            <div class="allocation-item">
+                                <span class="category">Operations (18 months)</span>
+                                <span class="amount">€900,000</span>
+                            </div>
+                            <div class="allocation-item">
+                                <span class="category">Buffer</span>
+                                <span class="amount">€100,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="break-even">
+                <h3>Break-Even Analysis</h3>
+                <div class="break-even-chart">
+                    <canvas id="breakEvenChart"></canvas>
+                    <p class="chart-caption">Monthly revenue vs. costs projection</p>
+                </div>
+                <div class="break-even-info">
+                    <div class="info-item">
+                        <span class="label">Break-even point:</span>
+                        <span class="value">Month 32 (Year 3, Month 8)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Active users at break-even:</span>
+                        <span class="value">~27,500</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Paid subscribers at break-even:</span>
+                        <span class="value">~5,500</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Monthly revenue at break-even:</span>
+                        <span class="value">~€145,000</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Monthly costs at break-even:</span>
+                        <span class="value">~€144,500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kpis" class="section-dark">
+        <div class="container">
+            <h2>Key Performance Indicators</h2>
+            <div class="kpi-metrics">
+                <table class="data-table full-width">
+                    <tr>
+                        <th>KPI</th>
+                        <th>Year 1 Target</th>
+                        <th>Year 2 Target</th>
+                        <th>Year 3 Target</th>
+                    </tr>
+                    <tr>
+                        <td>Monthly Active Users (MAU)</td>
+                        <td>2,000</td>
+                        <td>12,500</td>
+                        <td>40,000</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Recurring Revenue (MRR)</td>
+                        <td>€1,750</td>
+                        <td>€12,000</td>
+                        <td>€48,000</td>
+                    </tr>
+                    <tr>
+                        <td>Average Revenue Per User (ARPU)</td>
+                        <td>€0.85</td>
+                        <td>€1.15</td>
+                        <td>€1.45</td>
+                    </tr>
+                    <tr>
+                        <td>Customer Lifetime Value (CLV)</td>
+                        <td>€15.00</td>
+                        <td>€24.00</td>
+                        <td>€32.00</td>
+                    </tr>
+                    <tr>
+                        <td>User Acquisition Cost (CAC)</td>
+                        <td>€8.00</td>
+                        <td>€7.00</td>
+                        <td>€6.50</td>
+                    </tr>
+                    <tr>
+                        <td>Retention Rate (Month-to-Month)</td>
+                        <td>60%</td>
+                        <td>70%</td>
+                        <td>75%</td>
+                    </tr>
+                    <tr>
+                        <td>Tickets Sold Per Active User</td>
+                        <td>2.5 annually</td>
+                        <td>2.0 monthly</td>
+                        <td>1.9 monthly</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="kpi-charts">
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <canvas id="arpuChart"></canvas>
+                        <p class="chart-caption">ARPU Growth over 3 years</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="clvCacChart"></canvas>
+                        <p class="chart-caption">CLV vs CAC comparison</p>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <canvas id="retentionChart"></canvas>
+                        <p class="chart-caption">Retention Rate Growth</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="mrrChart"></canvas>
+                        <p class="chart-caption">Monthly Recurring Revenue Growth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sensitivity" class="section-light">
+        <div class="container">
+            <h2>Sensitivity Analysis</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Key Variables Impact</h3>
+                    <table class="data-table">
+                        <tr>
+                            <th>Variable</th>
+                            <th>Change</th>
+                            <th>Impact on Year 3 Revenue</th>
+                            <th>Impact on Break-Even</th>
+                        </tr>
+                        <tr>
+                            <td>Freemium to Paid Conversion</td>
+                            <td>+2%</td>
+                            <td>+€58,000</td>
+                            <td>-4 months</td>
+                        </tr>
+                        <tr>
+                            <td>Freemium to Paid Conversion</td>
+                            <td>-2%</td>
+                            <td>-€58,000</td>
+                            <td>+5 months</td>
+                        </tr>
+                        <tr>
+                            <td>User Growth Rate</td>
+                            <td>+5%</td>
+                            <td>+€87,000</td>
+                            <td>-3 months</td>
+                        </tr>
+                        <tr>
+                            <td>User Growth Rate</td>
+                            <td>-5%</td>
+                            <td>-€87,000</td>
+                            <td>+4 months</td>
+                        </tr>
+                        <tr>
+                            <td>Ticket Commission</td>
+                            <td>+1%</td>
+                            <td>+€26,250</td>
+                            <td>-1 month</td>
+                        </tr>
+                        <tr>
+                            <td>Ticket Commission</td>
+                            <td>-1%</td>
+                            <td>-€26,250</td>
+                            <td>+1 month</td>
+                        </tr>
+                        <tr>
+                            <td>Customer Acquisition Cost</td>
+                            <td>+20%</td>
+                            <td>No direct impact</td>
+                            <td>+7 months</td>
+                        </tr>
+                        <tr>
+                            <td>Customer Acquisition Cost</td>
+                            <td>-20%</td>
+                            <td>No direct impact</td>
+                            <td>-5 months</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h3>Scenario Analysis</h3>
+                    <div class="chart-container">
+                        <canvas id="scenarioChart"></canvas>
+                        <p class="chart-caption">Revenue comparison across scenarios</p>
+                    </div>
+                    <table class="data-table">
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Year 3 Revenue</th>
+                            <th>Break-Even Point</th>
+                        </tr>
+                        <tr>
+                            <td>Base Case</td>
+                            <td>€580,250</td>
+                            <td>Month 32</td>
+                        </tr>
+                        <tr>
+                            <td>Optimistic</td>
+                            <td>€812,350</td>
+                            <td>Month 24</td>
+                        </tr>
+                        <tr>
+                            <td>Conservative</td>
+                            <td>€435,188</td>
+                            <td>Month 38</td>
+                        </tr>
+                        <tr>
+                            <td>Pessimistic</td>
+                            <td>€319,138</td>
+                            <td>Month 45+</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tornado-chart">
+                <h3>Sensitivity Tornado Chart</h3>
+                <div class="chart-container full-width">
+                    <canvas id="tornadoChart"></canvas>
+                    <p class="chart-caption">Impact of key variables on Year 3 revenue</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recommendations" class="section-dark">
+        <div class="container">
+            <h2>Recommendations</h2>
+            <div class="recommendations-grid">
+                <div class="recommendation">
+                    <div class="recommendation-number">1</div>
+                    <h3>Funding Strategy</h3>
+                    <p>Secure the initial pre-seed round of €750,000 to fund development and early operations, with preparations for a Series A round of €2,000,000 toward the end of Year 1.</p>
+                </div>
+                <div class="recommendation">
+                    <div class="recommendation-number">2</div>
+                    <h3>Growth Focus</h3>
+                    <p>Prioritize user acquisition and retention over immediate monetization in the first 12-18 months to build a robust user base.</p>
+                </div>
+                <div class="recommendation">
+                    <div class="recommendation-number">3</div>
+                    <h3>Partnerships</h3>
+                    <p>Aggressively pursue partnerships with key event organizers in Paris to ensure a strong supply of desirable events on the platform.</p>
+                </div>
+                <div class="recommendation">
+                    <div class="recommendation-number">4</div>
+                    <h3>Feature Prioritization</h3>
+                    <p>Focus development resources on features that directly impact conversion rates and retention, particularly the calendar integration and recommendation algorithm.</p>
+                </div>
+                <div class="recommendation">
+                    <div class="recommendation-number">5</div>
+                    <h3>Pricing Optimization</h3>
+                    <p>Conduct regular price sensitivity testing to optimize the premium tier pricing structure as the user base grows.</p>
+                </div>
+                <div class="recommendation">
+                    <div class="recommendation-number">6</div>
+                    <h3>Cost Control</h3>
+                    <p>Maintain vigilant cost control, particularly in non-growth driving operational expenses, to extend runway and improve cash flow projections.</p>
+                </div>
+                <div class="recommendation">
+                    <div class="recommendation-number">7</div>
+                    <h3>Metrics Tracking</h3>
+                    <p>Implement robust analytics from day one to track KPIs and enable data-driven refinement of the model assumptions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Momento</h3>
+                    <p>Cultural Event Discovery & Booking App</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Financial Model</h3>
+                    <p>A comprehensive 3-year projection for funding and strategic decision-making</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p>info@momento-app.com</p>
+                    <p>+33 1 23 45 67 89</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Momento. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html> 
