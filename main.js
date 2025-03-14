@@ -1,10 +1,57 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Add smooth scrolling to all links
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 80; // Account for header height
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Function to hide loading indicators
+    const hideLoading = (chartId) => {
+        const container = document.getElementById(chartId).closest('.chart-container');
+        const loadingEl = container.querySelector('.chart-loading');
+        if (loadingEl) {
+            loadingEl.style.display = 'none';
+        }
+    };
+
+    // Create a ResizeObserver to handle chart resizing
+    const resizeCharts = () => {
+        Chart.instances.forEach(chart => {
+            chart.resize();
+        });
+    };
+    
+    // Listen for window resize events with debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(resizeCharts, 100);
+    });
+
     // Chart.js Global Configuration
     Chart.defaults.color = '#666';
     Chart.defaults.font.family = "'Poppins', sans-serif";
     Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.7)';
     Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.responsive = true;
+    Chart.defaults.maintainAspectRatio = false;
+    Chart.defaults.plugins.legend.display = true;
+    Chart.defaults.plugins.legend.position = 'top';
+    Chart.defaults.plugins.legend.labels.boxWidth = 10;
+    Chart.defaults.plugins.legend.labels.padding = 10;
+    Chart.defaults.animation.duration = 1000; // Reduce animation time for faster loading
     
     // Define colors for consistent use across charts
     const colors = {
@@ -65,8 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 scales: {
                     x: {
                         stacked: true,
@@ -85,9 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 plugins: {
-                    legend: {
-                        position: 'top',
-                    },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
@@ -98,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('overviewChart');
     }
 
     // Create Tickets Chart
@@ -121,8 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true,
@@ -149,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('ticketsChart');
     }
 
     // Create User Growth Chart
@@ -181,8 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true,
@@ -203,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('userGrowthChart');
     }
 
     // Create Cost Breakdown Chart
@@ -224,8 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
@@ -250,6 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('costBreakdownChart');
     }
 
     // Create Pre-Seed Funding Chart
@@ -290,6 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('preSeedChart');
     }
 
     // Create Series A Funding Chart
@@ -330,6 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('seriesAChart');
     }
 
     // Create Break-Even Chart
@@ -429,6 +471,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('breakEvenChart');
     }
 
     // Create ARPU Chart
@@ -479,6 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('arpuChart');
     }
 
     // Create CLV vs CAC Chart
@@ -539,6 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('clvCacChart');
     }
 
     // Create Retention Chart
@@ -598,6 +643,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('retentionChart');
     }
 
     // Create MRR Chart
@@ -656,6 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('mrrChart');
     }
 
     // Create Scenario Chart
@@ -701,6 +748,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('scenarioChart');
     }
 
     // Create Tornado Chart
@@ -760,21 +808,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        hideLoading('tornadoChart');
     }
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
 
     // Check active section on scroll
     window.addEventListener('scroll', function() {
