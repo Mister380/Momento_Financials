@@ -6,7 +6,32 @@
     <title>Momento Financial Model</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    
+    <script>
+        // Error tracking
+        window.chartErrors = [];
+        function logScriptError(scriptName, error) {
+            console.error('Error loading ' + scriptName + ':', error);
+            window.chartErrors.push({script: scriptName, error: error});
+            // Show error in all chart containers
+            setTimeout(() => {
+                document.querySelectorAll('.chart-container').forEach(container => {
+                    container.innerHTML = '<div class="chart-error">Failed to load ' + scriptName + '. Please check your internet connection and refresh the page.</div>';
+                });
+            }, 2000);
+        }
+    </script>
+    
+    <!-- Use specific Chart.js version for better compatibility -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" 
+            onerror="logScriptError('Chart.js', 'Failed to load library')"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0/dist/chartjs-plugin-annotation.min.js" 
+            onerror="logScriptError('chartjs-plugin-annotation', 'Failed to load plugin')"></script>
+    <script>
+        // Make sure the browser loads a fresh version of main.js
+        document.write('<script src="main.js?v=' + new Date().getTime() + '" onerror="logScriptError(\'main.js\', \'Failed to load script\')"><\/script>');
+    </script>
+    
     <style>
         .chart-loading {
             display: flex;
@@ -15,6 +40,17 @@
             height: 100%;
             font-style: italic;
             color: #999;
+        }
+        
+        .chart-error {
+            color: #f44336;
+            text-align: center;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
         }
     </style>
 </head>
@@ -33,6 +69,13 @@
                     <li><a href="#costs">Costs</a></li>
                     <li><a href="#funding">Funding</a></li>
                     <li><a href="#kpis">KPIs</a></li>
+                    <li class="chart-mode-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="chartModeToggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="toggle-label">Static Mode</span>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -738,7 +781,5 @@
             </div>
         </div>
     </footer>
-
-    <script src="main.js"></script>
 </body>
-</html>
+</html> 
