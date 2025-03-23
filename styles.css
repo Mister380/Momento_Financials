@@ -111,13 +111,26 @@ li {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 300px;
+    min-height: 300px;
+    height: auto;
     max-width: 100%;
     margin-bottom: 15px;
+    position: relative;
 }
 
 .section-dark .chart-container {
     background-color: #272727;
+}
+
+.chart-error {
+    color: #f44336;
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
 }
 
 .full-width {
@@ -445,37 +458,85 @@ nav a:hover, nav a:focus {
 }
 
 .cost-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .cost-category {
+    width: 100%;
+    margin-bottom: 30px;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     padding: 20px;
     border: 1px solid var(--border-color);
 }
 
-.cost-category h3 {
-    color: var(--primary-color);
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.cost-category table {
+    width: 100%;
+    min-width: 800px;
+    table-layout: fixed;
+}
+
+.cost-category table th,
+.cost-category table td {
+    padding: 10px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.cost-category table th:first-child,
+.cost-category table td:first-child {
+    width: 30%;
+}
+
+.cost-category table th:not(:first-child),
+.cost-category table td:not(:first-child) {
+    width: 14%;
+    text-align: center;
+}
+
+.cost-category h3,
+.cost-category h4 {
     margin-bottom: 15px;
+    color: var(--primary-color);
 }
 
 .cost-category ul {
-    margin-left: 20px;
+    padding-left: 20px;
 }
 
 .cost-category li {
-    position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    line-height: 1.5;
 }
 
-.cost-category li:before {
-    content: '•';
-    position: absolute;
-    left: -15px;
-    color: var(--primary-color);
+.cost-category.list-version {
+    margin-top: 10px;
+}
+
+/* Custom scrollbar for table wrappers */
+.table-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
 }
 
 /* Funding Allocation */
@@ -665,7 +726,7 @@ footer {
     }
     
     .chart-container {
-        height: 250px;
+        min-height: 250px;
     }
 }
 
@@ -707,7 +768,7 @@ footer {
     }
     
     .chart-container {
-        height: 220px;
+        min-height: 220px;
     }
     
     .section-light, .section-dark {
@@ -728,5 +789,116 @@ footer {
     
     .data-table {
         font-size: 0.9rem;
+    }
+}
+
+/* Static Chart Styles */
+.static-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.static-chart img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    display: block;
+}
+
+.static-chart-overlay {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* Toggle Switch Styles */
+.chart-mode-toggle {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.toggle-label {
+    margin-left: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Use grid for better layout control on larger screens */
+@media (min-width: 992px) {
+    .cost-categories {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Make tables more responsive */
+    .data-table {
+        font-size: 0.95rem;
     }
 } 

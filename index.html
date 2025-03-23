@@ -6,7 +6,32 @@
     <title>Momento Financial Model</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    
+    <script>
+        // Error tracking
+        window.chartErrors = [];
+        function logScriptError(scriptName, error) {
+            console.error('Error loading ' + scriptName + ':', error);
+            window.chartErrors.push({script: scriptName, error: error});
+            // Show error in all chart containers
+            setTimeout(() => {
+                document.querySelectorAll('.chart-container').forEach(container => {
+                    container.innerHTML = '<div class="chart-error">Failed to load ' + scriptName + '. Please check your internet connection and refresh the page.</div>';
+                });
+            }, 2000);
+        }
+    </script>
+    
+    <!-- Use specific Chart.js version for better compatibility -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" 
+            onerror="logScriptError('Chart.js', 'Failed to load library')"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0/dist/chartjs-plugin-annotation.min.js" 
+            onerror="logScriptError('chartjs-plugin-annotation', 'Failed to load plugin')"></script>
+    <script>
+        // Make sure the browser loads a fresh version of main.js
+        document.write('<script src="main.js?v=' + new Date().getTime() + '" onerror="logScriptError(\'main.js\', \'Failed to load script\')"><\/script>');
+    </script>
+    
     <style>
         .chart-loading {
             display: flex;
@@ -15,6 +40,17 @@
             height: 100%;
             font-style: italic;
             color: #999;
+        }
+        
+        .chart-error {
+            color: #f44336;
+            text-align: center;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
         }
     </style>
 </head>
@@ -33,6 +69,13 @@
                     <li><a href="#costs">Costs</a></li>
                     <li><a href="#funding">Funding</a></li>
                     <li><a href="#kpis">KPIs</a></li>
+                    <li class="chart-mode-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="chartModeToggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="toggle-label">Static Mode</span>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -40,23 +83,23 @@
 
     <section id="hero">
         <div class="container">
-            <h2>Financial Model & Economic Plan</h2>
-            <p>A comprehensive 3-year projection demonstrating Momento's financial viability and growth potential</p>
+            <h2>Financial Model & Economic Plan (Bootstrap Approach)</h2>
+            <p>A comprehensive 5-year projection demonstrating Momento's financial viability with self-funding strategy</p>
             <div class="key-metrics">
                 <div class="metric">
-                    <span class="number">€580K+</span>
-                    <span class="label">Year 3 Revenue</span>
+                    <span class="number">€700K+</span>
+                    <span class="label">Year 5 Revenue</span>
                 </div>
                 <div class="metric">
-                    <span class="number">40K</span>
-                    <span class="label">Year 3 Active Users</span>
+                    <span class="number">25K</span>
+                    <span class="label">Year 5 Active Users</span>
                 </div>
                 <div class="metric">
-                    <span class="number">4.9</span>
-                    <span class="label">Year 3 CLV:CAC Ratio</span>
+                    <span class="number">€1.25M</span>
+                    <span class="label">5-Year Cumulative Cash Flow</span>
                 </div>
                 <div class="metric">
-                    <span class="number">Month 32</span>
+                    <span class="number">Month 30</span>
                     <span class="label">Break-Even Point</span>
                 </div>
             </div>
@@ -69,7 +112,7 @@
             <div class="two-column">
                 <div>
                     <p class="lead">Momento is designed to simplify how busy professionals, cultural enthusiasts, and social groups discover, schedule, and book cultural events.</p>
-                    <p>This financial model demonstrates the economic viability of the Momento project over a 3-year period, with detailed projections for revenue, costs, cash flow, and key financial metrics.</p>
+                    <p>This financial model demonstrates the economic viability of the Momento project over a 5-year period with a bootstrap approach, focusing on self-funding, sustainable growth, and profitability.</p>
                     <div class="model-summary">
                         <h3>Key Projections</h3>
                         <table class="summary-table">
@@ -78,30 +121,40 @@
                                 <th>Year 1</th>
                                 <th>Year 2</th>
                                 <th>Year 3</th>
+                                <th>Year 4</th>
+                                <th>Year 5</th>
                             </tr>
                             <tr>
                                 <td>Total Revenue</td>
-                                <td>€23,126</td>
-                                <td>€172,375</td>
-                                <td>€580,250</td>
+                                <td>€20,000</td>
+                                <td>€95,000</td>
+                                <td>€185,000</td>
+                                <td>€390,000</td>
+                                <td>€700,000</td>
                             </tr>
                             <tr>
                                 <td>Total Costs</td>
-                                <td>€734,000</td>
-                                <td>€1,040,000</td>
-                                <td>€1,733,000</td>
+                                <td>€75,000</td>
+                                <td>€150,000</td>
+                                <td>€220,000</td>
+                                <td>€330,000</td>
+                                <td>€450,000</td>
                             </tr>
                             <tr>
                                 <td>Net Cash Flow</td>
-                                <td>-€710,874</td>
-                                <td>-€867,625</td>
-                                <td>-€1,152,750</td>
+                                <td>-€55,000</td>
+                                <td>-€55,000</td>
+                                <td>-€35,000</td>
+                                <td>€60,000</td>
+                                <td>€250,000</td>
                             </tr>
                             <tr>
                                 <td>Active Users</td>
-                                <td>2,000</td>
-                                <td>12,500</td>
-                                <td>40,000</td>
+                                <td>1,500</td>
+                                <td>5,000</td>
+                                <td>10,000</td>
+                                <td>18,000</td>
+                                <td>25,000</td>
                             </tr>
                         </table>
                     </div>
@@ -109,7 +162,7 @@
                 <div class="chart-container">
                     <canvas id="overviewChart"></canvas>
                     <div class="chart-loading">Loading chart...</div>
-                    <p class="chart-caption">Revenue growth projection over 3 years</p>
+                    <p class="chart-caption">Revenue growth projection over 5 years</p>
                 </div>
             </div>
         </div>
@@ -130,26 +183,28 @@
                                 <li>Basic calendar reminders</li>
                             </ul>
                             <div class="conversion">
-                                <span>Year 1: 90%</span>
-                                <span>Year 3: 80%</span>
+                                <span>Year 1: 92%</span>
+                                <span>Year 3: 85%</span>
+                                <span>Year 5: 75%</span>
                             </div>
                         </div>
                         <div class="tier">
                             <h4>Standard Premium</h4>
-                            <div class="price">€4.99/month</div>
+                            <div class="price">€5.99/month</div>
                             <ul>
                                 <li>Unlimited recommendations</li>
                                 <li>Enhanced calendar sync</li>
                                 <li>Group planning tools</li>
                             </ul>
                             <div class="conversion">
-                                <span>Year 1: 8%</span>
-                                <span>Year 3: 15%</span>
+                                <span>Year 1: 6%</span>
+                                <span>Year 3: 12%</span>
+                                <span>Year 5: 18%</span>
                             </div>
                         </div>
                         <div class="tier">
                             <h4>VIP/Elite Premium</h4>
-                            <div class="price">€9.99/month</div>
+                            <div class="price">€11.99/month</div>
                             <ul>
                                 <li>All Standard features</li>
                                 <li>Exclusive early ticket access</li>
@@ -159,7 +214,8 @@
                             </ul>
                             <div class="conversion">
                                 <span>Year 1: 2%</span>
-                                <span>Year 3: 5%</span>
+                                <span>Year 3: 3%</span>
+                                <span>Year 5: 7%</span>
                             </div>
                         </div>
                     </div>
@@ -190,16 +246,24 @@
                         </div>
                         <div class="ticket-stats">
                             <div class="stat">
-                                <span class="value">5,000</span>
+                                <span class="value">7,500</span>
                                 <span class="period">Year 1</span>
                             </div>
                             <div class="stat">
-                                <span class="value">25,000</span>
+                                <span class="value">32,500</span>
                                 <span class="period">Year 2</span>
                             </div>
                             <div class="stat">
-                                <span class="value">75,000</span>
+                                <span class="value">95,000</span>
                                 <span class="period">Year 3</span>
+                            </div>
+                            <div class="stat">
+                                <span class="value">180,000</span>
+                                <span class="period">Year 4</span>
+                            </div>
+                            <div class="stat">
+                                <span class="value">275,000</span>
+                                <span class="period">Year 5</span>
                             </div>
                         </div>
                     </div>
@@ -214,7 +278,7 @@
             <div class="two-column">
                 <div class="chart-container">
                     <canvas id="userGrowthChart"></canvas>
-                    <p class="chart-caption">User growth projection over 3 years</p>
+                    <p class="chart-caption">User growth projection over 5 years</p>
                 </div>
                 <div>
                     <h3>User Acquisition</h3>
@@ -224,30 +288,40 @@
                             <th>Year 1</th>
                             <th>Year 2</th>
                             <th>Year 3</th>
+                            <th>Year 4</th>
+                            <th>Year 5</th>
                         </tr>
                         <tr>
                             <td>App Downloads</td>
-                            <td>10,000</td>
-                            <td>50,000</td>
-                            <td>150,000</td>
+                            <td>12,500</td>
+                            <td>55,000</td>
+                            <td>160,000</td>
+                            <td>280,000</td>
+                            <td>400,000</td>
                         </tr>
                         <tr>
                             <td>Active Users</td>
-                            <td>2,000</td>
-                            <td>12,500</td>
-                            <td>40,000</td>
+                            <td>2,500</td>
+                            <td>15,000</td>
+                            <td>48,000</td>
+                            <td>90,000</td>
+                            <td>150,000</td>
                         </tr>
                         <tr>
                             <td>User Retention Rate</td>
-                            <td>60%</td>
-                            <td>70%</td>
-                            <td>75%</td>
+                            <td>65%</td>
+                            <td>72%</td>
+                            <td>77%</td>
+                            <td>80%</td>
+                            <td>82%</td>
                         </tr>
                         <tr>
                             <td>Monthly User Growth</td>
+                            <td>18%</td>
+                            <td>22%</td>
+                            <td>18%</td>
                             <td>15%</td>
-                            <td>20%</td>
-                            <td>15%</td>
+                            <td>12%</td>
                         </tr>
                     </table>
                     
@@ -258,36 +332,48 @@
                             <th>Year 1</th>
                             <th>Year 2</th>
                             <th>Year 3</th>
+                            <th>Year 4</th>
+                            <th>Year 5</th>
                         </tr>
                         <tr>
                             <td>Freemium to Paid Conversion</td>
-                            <td>10%</td>
+                            <td>8%</td>
+                            <td>13%</td>
                             <td>15%</td>
                             <td>20%</td>
+                            <td>25%</td>
                         </tr>
                         <tr>
                             <td>Average Revenue Per User (ARPU)</td>
                             <td>€0.85</td>
                             <td>€1.15</td>
                             <td>€1.45</td>
+                            <td>€1.75</td>
+                            <td>€2.05</td>
                         </tr>
                         <tr>
                             <td>Customer Acquisition Cost (CAC)</td>
                             <td>€8.00</td>
                             <td>€7.00</td>
                             <td>€6.50</td>
+                            <td>€6.00</td>
+                            <td>€5.50</td>
                         </tr>
                         <tr>
                             <td>Customer Lifetime Value (CLV)</td>
                             <td>€15.00</td>
                             <td>€24.00</td>
                             <td>€32.00</td>
+                            <td>€40.00</td>
+                            <td>€48.00</td>
                         </tr>
                         <tr>
                             <td>CLV:CAC Ratio</td>
                             <td>1.9</td>
                             <td>3.4</td>
                             <td>4.9</td>
+                            <td>6.7</td>
+                            <td>8.7</td>
                         </tr>
                     </table>
                 </div>
@@ -297,26 +383,26 @@
                 <div class="funnel-chart">
                     <div class="funnel-step" style="width: 100%;">
                         <span class="step-name">App Downloads</span>
-                        <span class="step-value">150,000</span>
+                        <span class="step-value">400,000</span>
                     </div>
                     <div class="funnel-step" style="width: 80%;">
                         <span class="step-name">App Installs</span>
-                        <span class="step-value">120,000</span>
+                        <span class="step-value">320,000</span>
                     </div>
                     <div class="funnel-step" style="width: 50%;">
                         <span class="step-name">Sign-ups</span>
-                        <span class="step-value">75,000</span>
+                        <span class="step-value">200,000</span>
                     </div>
-                    <div class="funnel-step" style="width: 27%;">
+                    <div class="funnel-step" style="width: 37%;">
                         <span class="step-name">Active Users</span>
-                        <span class="step-value">40,000</span>
+                        <span class="step-value">150,000</span>
                     </div>
-                    <div class="funnel-step" style="width: 5%;">
+                    <div class="funnel-step" style="width: 9%;">
                         <span class="step-name">Paid Subscribers</span>
-                        <span class="step-value">8,000</span>
+                        <span class="step-value">37,500</span>
                     </div>
                 </div>
-                <p class="chart-caption">Year 3 user acquisition funnel</p>
+                <p class="chart-caption">Year 5 user acquisition funnel</p>
             </div>
         </div>
     </section>
@@ -330,71 +416,241 @@
                     <p class="chart-caption">Cost breakdown by category (Year 1)</p>
                 </div>
                 <div class="cost-summary">
-                    <h3>3-Year Cost Projection</h3>
+                    <h3>5-Year Cost Projection</h3>
                     <table class="data-table">
                         <tr>
                             <th>Category</th>
                             <th>Year 1</th>
                             <th>Year 2</th>
                             <th>Year 3</th>
+                            <th>Year 4</th>
+                            <th>Year 5</th>
                         </tr>
                         <tr>
                             <td>Development & Technical</td>
-                            <td>€295,000</td>
-                            <td>€199,000</td>
-                            <td>€298,000</td>
+                            <td>€61,000</td>
+                            <td>€57,000</td>
+                            <td>€94,000</td>
+                            <td>€144,000</td>
+                            <td>€193,000</td>
                         </tr>
                         <tr>
                             <td>Marketing & User Acquisition</td>
-                            <td>€170,000</td>
-                            <td>€340,000</td>
-                            <td>€570,000</td>
+                            <td>€24,000</td>
+                            <td>€57,000</td>
+                            <td>€108,000</td>
+                            <td>€165,000</td>
+                            <td>€228,000</td>
                         </tr>
                         <tr>
                             <td>Operational Overheads</td>
-                            <td>€269,000</td>
-                            <td>€501,000</td>
-                            <td>€865,000</td>
+                            <td>€22,800</td>
+                            <td>€36,000</td>
+                            <td>€184,000</td>
+                            <td>€349,000</td>
+                            <td>€554,000</td>
                         </tr>
                         <tr>
                             <td><strong>Total Costs</strong></td>
-                            <td><strong>€734,000</strong></td>
-                            <td><strong>€1,040,000</strong></td>
-                            <td><strong>€1,733,000</strong></td>
+                            <td><strong>€107,800</strong></td>
+                            <td><strong>€150,000</strong></td>
+                            <td><strong>€386,000</strong></td>
+                            <td><strong>€658,000</strong></td>
+                            <td><strong>€975,000</strong></td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="cost-categories">
+                <h3>Detailed 5-Year Cost Breakdown by Category</h3>
                 <div class="cost-category">
-                    <h3>Development & Technical</h3>
-                    <ul>
-                        <li>Initial Development: €200,000 (Y1), €50,000 (Y2), €75,000 (Y3)</li>
-                        <li>Ongoing Maintenance: €60,000 (Y1), €90,000 (Y2), €120,000 (Y3)</li>
-                        <li>Server & Hosting: €12,000 (Y1), €24,000 (Y2), €48,000 (Y3)</li>
-                        <li>API Integrations: €15,000 (Y1), €20,000 (Y2), €30,000 (Y3)</li>
-                        <li>Data Storage & Processing: €8,000 (Y1), €15,000 (Y2), €25,000 (Y3)</li>
-                    </ul>
+                    <h4>Development & Technical</h4>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <tr>
+                                <th>Item</th>
+                                <th>Year 1</th>
+                                <th>Year 2</th>
+                                <th>Year 3</th>
+                                <th>Year 4</th>
+                                <th>Year 5</th>
+                            </tr>
+                            <tr>
+                                <td>Initial Development</td>
+                                <td>€35,000</td>
+                                <td>€15,000</td>
+                                <td>€25,000</td>
+                                <td>€45,000</td>
+                                <td>€60,000</td>
+                            </tr>
+                            <tr>
+                                <td>Ongoing Maintenance</td>
+                                <td>€12,000</td>
+                                <td>€18,000</td>
+                                <td>€24,000</td>
+                                <td>€36,000</td>
+                                <td>€48,000</td>
+                            </tr>
+                            <tr>
+                                <td>Server & Hosting</td>
+                                <td>€5,000</td>
+                                <td>€9,000</td>
+                                <td>€18,000</td>
+                                <td>€25,000</td>
+                                <td>€36,000</td>
+                            </tr>
+                            <tr>
+                                <td>API Integrations</td>
+                                <td>€6,000</td>
+                                <td>€9,000</td>
+                                <td>€15,000</td>
+                                <td>€20,000</td>
+                                <td>€25,000</td>
+                            </tr>
+                            <tr>
+                                <td>Data Storage & Processing</td>
+                                <td>€3,000</td>
+                                <td>€6,000</td>
+                                <td>€12,000</td>
+                                <td>€18,000</td>
+                                <td>€24,000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Development & Technical</strong></td>
+                                <td><strong>€61,000</strong></td>
+                                <td><strong>€57,000</strong></td>
+                                <td><strong>€94,000</strong></td>
+                                <td><strong>€144,000</strong></td>
+                                <td><strong>€193,000</strong></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="cost-category">
-                    <h3>Marketing & User Acquisition</h3>
-                    <ul>
-                        <li>Digital Advertising: €80,000 (Y1), €150,000 (Y2), €250,000 (Y3)</li>
-                        <li>Influencer Partnerships: €30,000 (Y1), €60,000 (Y2), €100,000 (Y3)</li>
-                        <li>Referral Programs: €15,000 (Y1), €40,000 (Y2), €80,000 (Y3)</li>
-                        <li>PR & Content Marketing: €25,000 (Y1), €40,000 (Y2), €60,000 (Y3)</li>
-                        <li>Events & Sponsorships: €20,000 (Y1), €50,000 (Y2), €80,000 (Y3)</li>
-                    </ul>
+                    <h4>Marketing & User Acquisition</h4>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <tr>
+                                <th>Item</th>
+                                <th>Year 1</th>
+                                <th>Year 2</th>
+                                <th>Year 3</th>
+                                <th>Year 4</th>
+                                <th>Year 5</th>
+                            </tr>
+                            <tr>
+                                <td>Digital Advertising</td>
+                                <td>€12,000</td>
+                                <td>€21,000</td>
+                                <td>€36,000</td>
+                                <td>€54,000</td>
+                                <td>€72,000</td>
+                            </tr>
+                            <tr>
+                                <td>Influencer Partnerships</td>
+                                <td>€5,000</td>
+                                <td>€12,000</td>
+                                <td>€24,000</td>
+                                <td>€36,000</td>
+                                <td>€48,000</td>
+                            </tr>
+                            <tr>
+                                <td>Referral Programs</td>
+                                <td>€3,000</td>
+                                <td>€9,000</td>
+                                <td>€18,000</td>
+                                <td>€27,000</td>
+                                <td>€36,000</td>
+                            </tr>
+                            <tr>
+                                <td>PR & Content Marketing</td>
+                                <td>€4,000</td>
+                                <td>€9,000</td>
+                                <td>€15,000</td>
+                                <td>€24,000</td>
+                                <td>€36,000</td>
+                            </tr>
+                            <tr>
+                                <td>Events & Sponsorships</td>
+                                <td>€0</td>
+                                <td>€6,000</td>
+                                <td>€15,000</td>
+                                <td>€24,000</td>
+                                <td>€36,000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Marketing & User Acquisition</strong></td>
+                                <td><strong>€24,000</strong></td>
+                                <td><strong>€57,000</strong></td>
+                                <td><strong>€108,000</strong></td>
+                                <td><strong>€165,000</strong></td>
+                                <td><strong>€228,000</strong></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="cost-category">
-                    <h3>Operational Overheads</h3>
-                    <ul>
-                        <li>Salaries & Benefits: €180,000 (Y1), €350,000 (Y2), €600,000 (Y3)</li>
-                        <li>Office & Utilities: €24,000 (Y1), €36,000 (Y2), €60,000 (Y3)</li>
-                        <li>Customer Support: €30,000 (Y1), €60,000 (Y2), €120,000 (Y3)</li>
-                        <li>Administrative & Legal: €20,000 (Y1), €30,000 (Y2), €45,000 (Y3)</li>
-                        <li>Insurance & Compliance: €15,000 (Y1), €25,000 (Y2), €40,000 (Y3)</li>
-                    </ul>
+                    <h4>Operational Overheads</h4>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <tr>
+                                <th>Item</th>
+                                <th>Year 1</th>
+                                <th>Year 2</th>
+                                <th>Year 3</th>
+                                <th>Year 4</th>
+                                <th>Year 5</th>
+                            </tr>
+                            <tr>
+                                <td>Salaries & Benefits</td>
+                                <td>€0</td>
+                                <td>€0</td>
+                                <td>€120,000</td>
+                                <td>€250,000</td>
+                                <td>€420,000</td>
+                            </tr>
+                            <tr>
+                                <td>Office & Utilities</td>
+                                <td>€4,800</td>
+                                <td>€6,000</td>
+                                <td>€12,000</td>
+                                <td>€24,000</td>
+                                <td>€36,000</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Support</td>
+                                <td>€6,000</td>
+                                <td>€12,000</td>
+                                <td>€24,000</td>
+                                <td>€36,000</td>
+                                <td>€48,000</td>
+                            </tr>
+                            <tr>
+                                <td>Administrative & Legal</td>
+                                <td>€8,000</td>
+                                <td>€12,000</td>
+                                <td>€18,000</td>
+                                <td>€24,000</td>
+                                <td>€30,000</td>
+                            </tr>
+                            <tr>
+                                <td>Insurance & Compliance</td>
+                                <td>€4,000</td>
+                                <td>€6,000</td>
+                                <td>€10,000</td>
+                                <td>€15,000</td>
+                                <td>€20,000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Operational Overheads</strong></td>
+                                <td><strong>€22,800</strong></td>
+                                <td><strong>€36,000</strong></td>
+                                <td><strong>€184,000</strong></td>
+                                <td><strong>€349,000</strong></td>
+                                <td><strong>€554,000</strong></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -402,52 +658,52 @@
 
     <section id="funding" class="section-light">
         <div class="container">
-            <h2>Funding Requirements</h2>
+            <h2>Bootstrap Funding Model</h2>
             <div class="two-column">
                 <div>
-                    <h3>Pre-Seed Round: €750,000</h3>
+                    <h3>Cash Flow Projection (5 Years)</h3>
                     <div class="funding-allocation">
-                        <canvas id="preSeedChart"></canvas>
+                        <canvas id="cashFlowChart"></canvas>
                         <div class="allocation-list">
                             <div class="allocation-item">
-                                <span class="category">MVP Development</span>
-                                <span class="amount">€200,000</span>
+                                <span class="category">Initial Investment</span>
+                                <span class="amount">€50,000</span>
                             </div>
                             <div class="allocation-item">
-                                <span class="category">Marketing & User Acquisition</span>
-                                <span class="amount">€170,000</span>
+                                <span class="category">Cumulative Cash Flow (Year 5)</span>
+                                <span class="amount">€1,250,000</span>
                             </div>
                             <div class="allocation-item">
-                                <span class="category">Operations (12 months)</span>
-                                <span class="amount">€350,000</span>
+                                <span class="category">Break-Even Point</span>
+                                <span class="amount">Month 30</span>
                             </div>
                             <div class="allocation-item">
-                                <span class="category">Buffer</span>
-                                <span class="amount">€30,000</span>
+                                <span class="category">Growth Phase Begins</span>
+                                <span class="amount">Year 3</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h3>Series A Round: €2,000,000</h3>
+                    <h3>Cost Structure Evolution</h3>
                     <div class="funding-allocation">
-                        <canvas id="seriesAChart"></canvas>
+                        <canvas id="costScalingChart"></canvas>
                         <div class="allocation-list">
                             <div class="allocation-item">
-                                <span class="category">Product Enhancement</span>
-                                <span class="amount">€400,000</span>
+                                <span class="category">Year 1 Costs</span>
+                                <span class="amount">€75,000</span>
                             </div>
                             <div class="allocation-item">
-                                <span class="category">Marketing & Expansion</span>
-                                <span class="amount">€600,000</span>
+                                <span class="category">Year 3 Costs</span>
+                                <span class="amount">€220,000</span>
                             </div>
                             <div class="allocation-item">
-                                <span class="category">Operations (18 months)</span>
-                                <span class="amount">€900,000</span>
+                                <span class="category">Year 5 Costs</span>
+                                <span class="amount">€450,000</span>
                             </div>
                             <div class="allocation-item">
-                                <span class="category">Buffer</span>
-                                <span class="amount">€100,000</span>
+                                <span class="category">Cost-to-Revenue Ratio (Year 5)</span>
+                                <span class="amount">0.65</span>
                             </div>
                         </div>
                     </div>
@@ -462,23 +718,23 @@
                 <div class="break-even-info">
                     <div class="info-item">
                         <span class="label">Break-even point:</span>
-                        <span class="value">Month 32 (Year 3, Month 8)</span>
+                        <span class="value">Month 30 (Year 3, Month 6)</span>
                     </div>
                     <div class="info-item">
                         <span class="label">Active users at break-even:</span>
-                        <span class="value">~27,500</span>
+                        <span class="value">~15,000</span>
                     </div>
                     <div class="info-item">
                         <span class="label">Paid subscribers at break-even:</span>
-                        <span class="value">~5,500</span>
+                        <span class="value">~3,000</span>
                     </div>
                     <div class="info-item">
                         <span class="label">Monthly revenue at break-even:</span>
-                        <span class="value">~€145,000</span>
+                        <span class="value">~€18,500</span>
                     </div>
                     <div class="info-item">
                         <span class="label">Monthly costs at break-even:</span>
-                        <span class="value">~€144,500</span>
+                        <span class="value">~€18,500</span>
                     </div>
                 </div>
             </div>
@@ -495,48 +751,64 @@
                         <th>Year 1 Target</th>
                         <th>Year 2 Target</th>
                         <th>Year 3 Target</th>
+                        <th>Year 4 Target</th>
+                        <th>Year 5 Target</th>
                     </tr>
                     <tr>
                         <td>Monthly Active Users (MAU)</td>
-                        <td>2,000</td>
-                        <td>12,500</td>
-                        <td>40,000</td>
+                        <td>2,500</td>
+                        <td>15,000</td>
+                        <td>48,000</td>
+                        <td>90,000</td>
+                        <td>150,000</td>
                     </tr>
                     <tr>
                         <td>Monthly Recurring Revenue (MRR)</td>
-                        <td>€1,750</td>
-                        <td>€12,000</td>
-                        <td>€48,000</td>
+                        <td>€3,064</td>
+                        <td>€14,285</td>
+                        <td>€40,396</td>
+                        <td>€81,750</td>
+                        <td>€141,646</td>
                     </tr>
                     <tr>
                         <td>Average Revenue Per User (ARPU)</td>
-                        <td>€0.85</td>
-                        <td>€1.15</td>
-                        <td>€1.45</td>
+                        <td>€0.95</td>
+                        <td>€1.35</td>
+                        <td>€1.75</td>
+                        <td>€2.10</td>
+                        <td>€2.45</td>
                     </tr>
                     <tr>
                         <td>Customer Lifetime Value (CLV)</td>
-                        <td>€15.00</td>
-                        <td>€24.00</td>
-                        <td>€32.00</td>
+                        <td>€17.30</td>
+                        <td>€28.35</td>
+                        <td>€38.50</td>
+                        <td>€52.50</td>
+                        <td>€67.40</td>
                     </tr>
                     <tr>
                         <td>User Acquisition Cost (CAC)</td>
-                        <td>€8.00</td>
-                        <td>€7.00</td>
-                        <td>€6.50</td>
+                        <td>€4.80</td>
+                        <td>€4.20</td>
+                        <td>€3.90</td>
+                        <td>€3.60</td>
+                        <td>€3.30</td>
                     </tr>
                     <tr>
                         <td>Retention Rate (Month-to-Month)</td>
-                        <td>60%</td>
-                        <td>70%</td>
-                        <td>75%</td>
+                        <td>65%</td>
+                        <td>72%</td>
+                        <td>77%</td>
+                        <td>80%</td>
+                        <td>82%</td>
                     </tr>
                     <tr>
                         <td>Tickets Sold Per Active User</td>
-                        <td>2.5 annually</td>
-                        <td>2.0 monthly</td>
-                        <td>1.9 monthly</td>
+                        <td>3.0 annually</td>
+                        <td>2.2 annually</td>
+                        <td>2.0 annually</td>
+                        <td>2.0 annually</td>
+                        <td>1.8 annually</td>
                     </tr>
                 </table>
             </div>
@@ -544,21 +816,21 @@
                 <div class="chart-row">
                     <div class="chart-container">
                         <canvas id="arpuChart"></canvas>
-                        <p class="chart-caption">ARPU Growth over 3 years</p>
+                        <p class="chart-caption">ARPU Growth over 5 years</p>
                     </div>
                     <div class="chart-container">
                         <canvas id="clvCacChart"></canvas>
-                        <p class="chart-caption">CLV vs CAC comparison</p>
+                        <p class="chart-caption">CLV vs CAC comparison over 5 years</p>
                     </div>
                 </div>
                 <div class="chart-row">
                     <div class="chart-container">
                         <canvas id="retentionChart"></canvas>
-                        <p class="chart-caption">Retention Rate Growth</p>
+                        <p class="chart-caption">Retention Rate Growth over 5 years</p>
                     </div>
                     <div class="chart-container">
                         <canvas id="mrrChart"></canvas>
-                        <p class="chart-caption">Monthly Recurring Revenue Growth</p>
+                        <p class="chart-caption">Monthly Recurring Revenue Growth over 5 years</p>
                     </div>
                 </div>
             </div>
@@ -575,56 +847,56 @@
                         <tr>
                             <th>Variable</th>
                             <th>Change</th>
-                            <th>Impact on Year 3 Revenue</th>
+                            <th>Impact on Year 5 Revenue</th>
                             <th>Impact on Break-Even</th>
                         </tr>
                         <tr>
                             <td>Freemium to Paid Conversion</td>
-                            <td>+2%</td>
-                            <td>+€58,000</td>
-                            <td>-4 months</td>
+                            <td>+3%</td>
+                            <td>+€208,000</td>
+                            <td>-3 months</td>
                         </tr>
                         <tr>
                             <td>Freemium to Paid Conversion</td>
-                            <td>-2%</td>
-                            <td>-€58,000</td>
+                            <td>-3%</td>
+                            <td>-€208,000</td>
                             <td>+5 months</td>
                         </tr>
                         <tr>
                             <td>User Growth Rate</td>
                             <td>+5%</td>
-                            <td>+€87,000</td>
-                            <td>-3 months</td>
+                            <td>+€255,000</td>
+                            <td>-2 months</td>
                         </tr>
                         <tr>
                             <td>User Growth Rate</td>
                             <td>-5%</td>
-                            <td>-€87,000</td>
+                            <td>-€255,000</td>
                             <td>+4 months</td>
                         </tr>
                         <tr>
                             <td>Ticket Commission</td>
                             <td>+1%</td>
-                            <td>+€26,250</td>
+                            <td>+€96,250</td>
                             <td>-1 month</td>
                         </tr>
                         <tr>
                             <td>Ticket Commission</td>
                             <td>-1%</td>
-                            <td>-€26,250</td>
+                            <td>-€96,250</td>
                             <td>+1 month</td>
                         </tr>
                         <tr>
                             <td>Customer Acquisition Cost</td>
-                            <td>+20%</td>
-                            <td>No direct impact</td>
-                            <td>+7 months</td>
+                            <td>+30%</td>
+                            <td>-€45,000 (increased costs)</td>
+                            <td>+3 months</td>
                         </tr>
                         <tr>
                             <td>Customer Acquisition Cost</td>
-                            <td>-20%</td>
-                            <td>No direct impact</td>
-                            <td>-5 months</td>
+                            <td>-30%</td>
+                            <td>+€45,000 (decreased costs)</td>
+                            <td>-2 months</td>
                         </tr>
                     </table>
                 </div>
@@ -637,28 +909,33 @@
                     <table class="data-table">
                         <tr>
                             <th>Scenario</th>
-                            <th>Year 3 Revenue</th>
+                            <th>Year 5 Revenue</th>
                             <th>Break-Even Point</th>
+                            <th>Year 5 Cumulative CF</th>
                         </tr>
                         <tr>
                             <td>Base Case</td>
-                            <td>€580,250</td>
-                            <td>Month 32</td>
+                            <td>€1,699,750</td>
+                            <td>Month 29</td>
+                            <td>€1,096,892</td>
                         </tr>
                         <tr>
                             <td>Optimistic</td>
-                            <td>€812,350</td>
-                            <td>Month 24</td>
+                            <td>€2,379,650</td>
+                            <td>Month 23</td>
+                            <td>€1,802,500</td>
                         </tr>
                         <tr>
                             <td>Conservative</td>
-                            <td>€435,188</td>
-                            <td>Month 38</td>
+                            <td>€1,274,800</td>
+                            <td>Month 34</td>
+                            <td>€655,000</td>
                         </tr>
                         <tr>
                             <td>Pessimistic</td>
-                            <td>€319,138</td>
-                            <td>Month 45+</td>
+                            <td>€849,875</td>
+                            <td>Month 42</td>
+                            <td>€218,000</td>
                         </tr>
                     </table>
                 </div>
@@ -667,7 +944,7 @@
                 <h3>Sensitivity Tornado Chart</h3>
                 <div class="chart-container full-width">
                     <canvas id="tornadoChart"></canvas>
-                    <p class="chart-caption">Impact of key variables on Year 3 revenue</p>
+                    <p class="chart-caption">Impact of key variables on Year 5 revenue</p>
                 </div>
             </div>
         </div>
@@ -679,38 +956,38 @@
             <div class="recommendations-grid">
                 <div class="recommendation">
                     <div class="recommendation-number">1</div>
-                    <h3>Funding Strategy</h3>
-                    <p>Secure the initial pre-seed round of €750,000 to fund development and early operations, with preparations for a Series A round of €2,000,000 toward the end of Year 1.</p>
+                    <h3>Bootstrap Strategy</h3>
+                    <p>Launch with minimal initial investment of €50,000, focusing on essential features and early revenue generation to fund future development organically.</p>
                 </div>
                 <div class="recommendation">
                     <div class="recommendation-number">2</div>
-                    <h3>Growth Focus</h3>
-                    <p>Prioritize user acquisition and retention over immediate monetization in the first 12-18 months to build a robust user base.</p>
+                    <h3>Sustainable Growth</h3>
+                    <p>Adopt a measured approach to user acquisition, prioritizing quality over quantity and targeting the highest-value segments first to optimize resources.</p>
                 </div>
                 <div class="recommendation">
                     <div class="recommendation-number">3</div>
-                    <h3>Partnerships</h3>
-                    <p>Aggressively pursue partnerships with key event organizers in Paris to ensure a strong supply of desirable events on the platform.</p>
+                    <h3>Strategic Partnerships</h3>
+                    <p>Form revenue-sharing partnerships with event organizers to reduce upfront costs while ensuring a strong supply of quality events on the platform.</p>
                 </div>
                 <div class="recommendation">
                     <div class="recommendation-number">4</div>
                     <h3>Feature Prioritization</h3>
-                    <p>Focus development resources on features that directly impact conversion rates and retention, particularly the calendar integration and recommendation algorithm.</p>
+                    <p>Focus development resources on features that directly generate revenue and improve retention, particularly the calendar integration and recommendation algorithm.</p>
                 </div>
                 <div class="recommendation">
                     <div class="recommendation-number">5</div>
-                    <h3>Pricing Optimization</h3>
-                    <p>Conduct regular price sensitivity testing to optimize the premium tier pricing structure as the user base grows.</p>
+                    <h3>Early Monetization</h3>
+                    <p>Introduce premium features within the first 6 months to begin generating subscription revenue earlier, testing different price points with early adopters.</p>
                 </div>
                 <div class="recommendation">
                     <div class="recommendation-number">6</div>
                     <h3>Cost Control</h3>
-                    <p>Maintain vigilant cost control, particularly in non-growth driving operational expenses, to extend runway and improve cash flow projections.</p>
+                    <p>Maintain strict cost control by leveraging freelancers and contractors instead of full-time employees initially, and using affordable cloud solutions to minimize infrastructure costs.</p>
                 </div>
                 <div class="recommendation">
                     <div class="recommendation-number">7</div>
-                    <h3>Metrics Tracking</h3>
-                    <p>Implement robust analytics from day one to track KPIs and enable data-driven refinement of the model assumptions.</p>
+                    <h3>Metrics-Driven Scaling</h3>
+                    <p>Use detailed analytics to identify when key metrics justify additional investment, scaling resources in direct proportion to validated revenue growth.</p>
                 </div>
             </div>
         </div>
@@ -725,7 +1002,7 @@
                 </div>
                 <div class="footer-col">
                     <h3>Financial Model</h3>
-                    <p>A comprehensive 3-year projection for funding and strategic decision-making</p>
+                    <p>A comprehensive 5-year bootstrap projection for sustainable growth</p>
                 </div>
                 <div class="footer-col">
                     <h3>Contact</h3>
@@ -738,7 +1015,5 @@
             </div>
         </div>
     </footer>
-
-    <script src="main.js"></script>
 </body>
 </html> 
