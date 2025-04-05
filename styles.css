@@ -128,7 +128,7 @@ li {
 }
 
 .chart-container {
-    background-color: #E7CAC6; /* White container */
+    background-color: #f2ccdb; /* White container */
     border: 1px solid #222121; /* Lighter border */
     border-radius: 8px;
     padding: 20px;
@@ -250,7 +250,7 @@ nav a:hover, nav a:focus {
 }
 
 .metric {
-    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+    background-color: #e6b1c6; /* Semi-transparent white */
     border-radius: 8px;
     padding: 20px;
     min-width: 200px;
@@ -300,7 +300,7 @@ nav a:hover, nav a:focus {
 
 .data-table td, .summary-table td {
     padding: 10px 15px;
-    border-bottom: 1px solid var(--border-c); /* Use dark border for rows */
+    border-bottom: 1px solid #222223; /* Use dark border for rows */
     color: var(--base-text-color);
 }
 
@@ -592,7 +592,7 @@ nav a:hover, nav a:focus {
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-    background: var(--primary-accent-bg); /* Mauve scrollbar */
+    background: #e6b1c6; /* Mauve scrollbar */
     border-radius: 4px;
 }
 

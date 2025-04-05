@@ -467,7 +467,7 @@ def create_clv_cac_chart():
         # Create a small white background for better readability
         ax.text(mid_point_x, mid_point_y, f' {ratio:.1f}x ', 
                 ha='center', va='center', fontsize=11, fontweight='bold', color='black',
-                bbox=dict(facecolor='black', alpha=0.7, edgecolor='none', pad=3))
+                bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=3))
     
     ax.set_xlabel('Year', fontweight='bold', color='black')
     ax.set_ylabel('Amount (€)', fontweight='bold', color='black')
