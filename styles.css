@@ -1,12 +1,26 @@
-/* Base Styles */
+/* START OF COMPLETE UPDATED FILE styles.css - Based on NEW App Identity with Corrections */
+
+/* Base Styles - Updated to match NEW App Identity */
 :root {
-    --primary-color: #EBDCC4;
-    --secondary-color: #1e90ff;
-    --dark-bg: #181818;
-    --light-bg: #f4f4f4;
-    --light-text: #ffffff;
-    --dark-text: #333333;
-    --border-color: #343434;
+    /* --- Core NEW App Identity Colors --- */
+    --gradient-start: #F8DDCA;  /* Light peachy-pink */
+    --gradient-end: #E7CAC6;    /* Dustier pink */
+    --base-text-color: #222121; /* Very Dark Grey/Black */
+    --border-color: #222121;    /* Dark border for light theme */
+
+    /* --- Accent Palette (Pinks/Mauves from App) --- */
+    --primary-accent-bg: linear-gradient(to top, #5418A4, #FFE6CC); /* Mauve/Pink (e.g., for headers, cards) */
+    --secondary-accent-bg: #FFE6CD;/* Brighter Pink (e.g., for buttons, highlights) */
+    --highlight-text-color: #222121; /* Deep Mauve/Purple (e.g., for links, active states) */
+    --date-badge-bg: #D1B0C0;     /* Specific mauve for consistency if needed */
+
+    /* --- Other Colors --- */
+    --light-bg-solid: #CCE9FE; /* Off-white solid fallback/container bg */
+    --light-text: #DEE8D1;       /* White (mainly for buttons on dark/colored bg) */
+    --medium-grey-text: #747373; /* Medium grey for secondary text */
+
+    /* --- Utility/Status Colors (Keeping original blues/greens etc. unless overridden) --- */
+    --secondary-color: #1e90ff; /* Keeping original blue for now, but consider --highlight-text-color */
     --success-color: #4caf50;
     --warning-color: #ff9800;
     --danger-color: #f44336;
@@ -21,24 +35,33 @@
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    color: var(--dark-text);
-    background-color: var(--light-bg);
+    /* Default to NEW light theme */
+    color: var(--base-text-color);
+    background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+    background-attachment: fixed; /* Keep gradient fixed during scroll */
 }
 
 a {
     text-decoration: none;
-    color: var(--secondary-color);
+    color: var(--highlight-text-color); /* Use deep mauve for links */
+    transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: var(--base-text-color); /* Darken link on hover */
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
     line-height: 1.3;
+    color: var(--base-text-color); /* Headers are dark on light bg */
 }
 
 h2 {
     font-size: 2rem;
     position: relative;
     margin-bottom: 2rem;
+    color: var(--highlight-text-color); /* Use deep mauve for main section titles */
 }
 
 h2:after {
@@ -48,15 +71,13 @@ h2:after {
     bottom: -10px;
     width: 60px;
     height: 3px;
-    background-color: var(--primary-color);
-}
-
-.section-dark h2:after {
-    background-color: var(--primary-color);
+    background-color: var(--highlight-text-color); /* Match title color */
 }
 
 p {
     margin-bottom: 1rem;
+    color: var(--base-text-color);
+    opacity: 0.9;
 }
 
 ul {
@@ -70,7 +91,7 @@ li {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px; /* Keep side padding for content within container */
 }
 
 .lead {
@@ -82,21 +103,21 @@ li {
 .chart-caption {
     text-align: center;
     font-style: italic;
-    color: #666;
+    color: var(--medium-grey-text); /* Use medium grey for captions */
     margin-top: 0.5rem;
     font-size: 0.9rem;
 }
 
+/* Sections - Use semi-transparent white over gradient (CORRECTED) */
 .section-light, .section-dark {
-    background-color: var(--light-bg);
-    color: var(--dark-text);
-    padding: 40px 0;
+    background-color: #f1d7c8; /* Semi-transparent white */
+    color: var(--base-text-color);
+    padding: 40px 0; /* Apply vertical padding to the section */
     overflow: hidden;
-}
-
-.section-dark {
-    background-color: var(--dark-bg);
-    color: var(--light-text);
+    border-radius: 8px;
+    margin: 0 auto 30px; /* Center sections if container is not full width */
+    max-width: 1200px; /* Max width for the visual block */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .two-column {
@@ -107,10 +128,11 @@ li {
 }
 
 .chart-container {
-    background-color: #fff;
+    background-color: #E7CAC6; /* White container */
+    border: 1px solid #222121; /* Lighter border */
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     min-height: 300px;
     height: auto;
     max-width: 100%;
@@ -118,12 +140,8 @@ li {
     position: relative;
 }
 
-.section-dark .chart-container {
-    background-color: #272727;
-}
-
 .chart-error {
-    color: #f44336;
+    color: var(--danger-color);
     text-align: center;
     padding: 20px;
     height: 100%;
@@ -139,13 +157,14 @@ li {
 
 /* Header Styles */
 header {
-    background-color: var(--dark-bg);
-    color: var(--light-text);
+    background-color: var(--light-bg-solid);
+    color: var(--base-text-color);
     padding: 20px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid var(--border-color); /* Dark border */
 }
 
 header .container {
@@ -157,12 +176,13 @@ header .container {
 .logo h1 {
     font-size: 1.8rem;
     margin-bottom: 0;
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve logo text */
 }
 
 .tagline {
     font-size: 0.9rem;
     opacity: 0.8;
+    color: var(--base-text-color);
 }
 
 nav ul {
@@ -175,7 +195,7 @@ nav li {
 }
 
 nav a {
-    color: var(--light-text);
+    color: var(--base-text-color);
     font-weight: 500;
     padding: 5px 0;
     border-bottom: 2px solid transparent;
@@ -183,35 +203,42 @@ nav a {
 }
 
 nav a:hover, nav a:focus {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
+    color: var(--highlight-text-color);
+    border-bottom-color: var(--highlight-text-color);
 }
 
 /* Hero Section */
 #hero {
-    background-color: var(--dark-bg);
-    color: var(--light-text);
+    background-color: var(--primary-accent-bg); /* Use mauve accent bg */
+    color: var(--base-text-color);
     padding: 80px 0;
     text-align: center;
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
+    border-bottom: 1px solid var(--border-color);
 }
 
 #hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: var(--base-text-color); /* Dark text on the mauve bg */
 }
 
 #hero h2:after {
+    content: '';
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    bottom: -10px;
+    width: 60px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.7); /* Light underline (CORRECTED) */
 }
 
 #hero p {
     font-size: 1.2rem;
     max-width: 700px;
     margin: 0 auto 40px;
+    color: var(--base-text-color);
+    opacity: 0.9;
 }
 
 .key-metrics {
@@ -223,19 +250,19 @@ nav a:hover, nav a:focus {
 }
 
 .metric {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
     border-radius: 8px;
     padding: 20px;
     min-width: 200px;
     text-align: center;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
 }
 
 .metric .number {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve number */
     display: block;
     margin-bottom: 10px;
 }
@@ -243,9 +270,10 @@ nav a:hover, nav a:focus {
 .metric .label {
     font-size: 0.9rem;
     opacity: 0.9;
+    color: var(--base-text-color);
 }
 
-/* Tables */
+/* Tables (CORRECTED BORDERS) */
 .data-table, .summary-table {
     width: 100%;
     border-collapse: collapse;
@@ -253,6 +281,8 @@ nav a:hover, nav a:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    /* Removed outer border */
+    background-color: #f3d7c8; /* White table background */
 }
 
 .summary-table {
@@ -260,28 +290,22 @@ nav a:hover, nav a:focus {
 }
 
 .data-table th, .summary-table th {
-    background-color: var(--primary-color);
-    color: var(--dark-bg);
+    background-color: var(--primary-accent-bg); /* Mauve header */
+    color: var(--base-text-color); /* Dark text on header */
     text-align: left;
     padding: 12px 15px;
     font-weight: 600;
+    border-bottom: 2px solid var(--border-color); /* Stronger dark border */
 }
 
 .data-table td, .summary-table td {
     padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.section-dark .data-table td {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-c); /* Use dark border for rows */
+    color: var(--base-text-color);
 }
 
 .data-table tr:nth-child(even), .summary-table tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.section-dark .data-table tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(212, 180, 193, 0.15); /* Slightly more visible pink tint */
 }
 
 .data-table tr:last-child td, .summary-table tr:last-child td {
@@ -299,16 +323,17 @@ nav a:hover, nav a:focus {
 .tier {
     flex: 1;
     min-width: 200px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #DEE8D1; /* White tier card */
     border-radius: 8px;
     padding: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-accent-bg); /* Mauve border */
     display: flex;
     flex-direction: column;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .tier h4 {
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve title */
     margin-bottom: 15px;
 }
 
@@ -316,6 +341,7 @@ nav a:hover, nav a:focus {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 20px;
+    color: var(--base-text-color);
 }
 
 .tier ul {
@@ -327,21 +353,25 @@ nav a:hover, nav a:focus {
     padding-left: 20px;
     position: relative;
     margin-bottom: 10px;
+    color: var(--base-text-color);
+    opacity: 0.9;
 }
 
 .tier li:before {
     content: '✓';
     position: absolute;
     left: 0;
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve checkmark */
 }
 
 .tier .conversion {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(212, 180, 193, 0.15); /* Light pink bg */
     padding: 10px;
     border-radius: 5px;
     font-size: 0.9rem;
     margin-top: auto;
+    color: var(--base-text-color);
+    opacity: 0.8;
 }
 
 .tier .conversion span {
@@ -350,7 +380,7 @@ nav a:hover, nav a:focus {
 
 /* Commission Details */
 .commission-details {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--light-bg-solid); /* Off-white background */
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 30px;
@@ -371,19 +401,21 @@ nav a:hover, nav a:focus {
 .commission-item .label {
     width: 40%;
     font-weight: 500;
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve label */
 }
 
 .commission-item .value {
     width: 20%;
     font-size: 1.2rem;
     font-weight: 700;
+    color: var(--base-text-color); /* Dark value */
 }
 
 .commission-item .note {
     width: 40%;
     font-size: 0.9rem;
     opacity: 0.8;
+    color: var(--medium-grey-text); /* Medium grey note */
 }
 
 /* Ticket Stats */
@@ -402,12 +434,13 @@ nav a:hover, nav a:focus {
     display: block;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve value */
 }
 
 .ticket-stats .period {
     font-size: 0.9rem;
     opacity: 0.8;
+    color: var(--medium-grey-text); /* Medium grey period */
 }
 
 /* User Funnel */
@@ -421,8 +454,8 @@ nav a:hover, nav a:focus {
 }
 
 .funnel-step {
-    background-color: var(--primary-color);
-    color: var(--dark-text);
+    background-color: #d7eefe; /* Mauve background */
+    color: var(--base-text-color); /* Dark text */
     padding: 15px;
     margin: 0 auto 10px;
     border-radius: 8px;
@@ -432,11 +465,12 @@ nav a:hover, nav a:focus {
     max-width: 800px;
     font-weight: 500;
     transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .funnel-step:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .funnel-step .step-value {
@@ -452,7 +486,8 @@ nav a:hover, nav a:focus {
 }
 
 .cost-chart-container {
-    background-color: #272727;
+    background-color: #DEE8D1; /* White background */
+    border: 1px solid #222121; /* Light border */
     border-radius: 8px;
     padding: 20px;
 }
@@ -468,10 +503,10 @@ nav a:hover, nav a:focus {
 .cost-category {
     width: 100%;
     margin-bottom: 30px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #DEE8D1; /* White background */
     border-radius: 8px;
     padding: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color); /* Dark border */
 }
 
 .table-wrapper {
@@ -481,10 +516,13 @@ nav a:hover, nav a:focus {
     padding-bottom: 5px;
 }
 
+/* Apply table styles within cost category */
 .cost-category table {
     width: 100%;
     min-width: 800px;
     table-layout: fixed;
+    border-collapse: collapse;
+    background: none;
 }
 
 .cost-category table th,
@@ -492,7 +530,24 @@ nav a:hover, nav a:focus {
     padding: 10px;
     text-align: left;
     white-space: nowrap;
+    border-bottom: 1px solid var(--border-color); /* Use dark border */
+    color: var(--base-text-color);
 }
+
+.cost-category table th {
+    background-color: var(--primary-accent-bg); /* Mauve header */
+    color: var(--base-text-color);
+    border-bottom: 2px solid var(--border-color); /* Stronger dark border */
+}
+
+.cost-category table tr:nth-child(even) td {
+     background-color: rgba(212, 180, 193, 0.15); /* Light pink tint */
+}
+
+.cost-category table tr:last-child td {
+    border-bottom: none;
+}
+
 
 .cost-category table th:first-child,
 .cost-category table td:first-child {
@@ -508,7 +563,7 @@ nav a:hover, nav a:focus {
 .cost-category h3,
 .cost-category h4 {
     margin-bottom: 15px;
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve headers */
 }
 
 .cost-category ul {
@@ -518,6 +573,8 @@ nav a:hover, nav a:focus {
 .cost-category li {
     margin-bottom: 8px;
     line-height: 1.5;
+    color: var(--base-text-color);
+    opacity: 0.9;
 }
 
 .cost-category.list-version {
@@ -530,28 +587,25 @@ nav a:hover, nav a:focus {
 }
 
 .table-wrapper::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 4px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
+    background: var(--primary-accent-bg); /* Mauve scrollbar */
     border-radius: 4px;
 }
 
 /* Funding Allocation */
 .funding-allocation {
-    background-color: #fff;
+    background-color: #DEE8D1; /* White background */
+    border: 1px solid #e0e0e0; /* Light border */
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.section-dark .funding-allocation {
-    background-color: #272727;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .allocation-list {
@@ -562,11 +616,7 @@ nav a:hover, nav a:focus {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.section-dark .allocation-item {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #eee; /* Light internal border */
 }
 
 .allocation-item:last-child {
@@ -575,10 +625,13 @@ nav a:hover, nav a:focus {
 
 .allocation-item .category {
     font-weight: 500;
+    color: var(--base-text-color);
+    opacity: 0.9;
 }
 
 .allocation-item .amount {
     font-weight: 700;
+    color: var(--highlight-text-color); /* Mauve amount */
 }
 
 /* Break-Even Analysis */
@@ -587,15 +640,17 @@ nav a:hover, nav a:focus {
 }
 
 .break-even-chart {
-    background-color: #fff;
+    background-color: #DEE8D1; /* White background */
+    border: 1px solid #e0e0e0; /* Light border */
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .break-even-info {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(212, 180, 193, 0.1); /* Very light pink tint */
+    border: 1px solid var(--primary-accent-bg); /* Mauve border */
     border-radius: 8px;
     padding: 20px;
     display: grid;
@@ -610,14 +665,14 @@ nav a:hover, nav a:focus {
 
 .info-item .label {
     font-weight: 500;
-    color: #999;
+    color: var(--medium-grey-text); /* Medium grey label */
     margin-bottom: 5px;
 }
 
 .info-item .value {
     font-weight: 700;
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve value */
 }
 
 /* KPI Charts */
@@ -645,26 +700,29 @@ nav a:hover, nav a:focus {
 }
 
 .recommendation {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #DEE8D1; /* White box */
     border-radius: 8px;
     padding: 20px;
     position: relative;
     padding-left: 60px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-accent-bg); /* Mauve border */
     transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    color: var(--base-text-color);
 }
 
 .recommendation:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+    border-color: var(--highlight-text-color); /* Darker mauve border on hover */
 }
 
 .recommendation-number {
     position: absolute;
     left: 20px;
     top: 20px;
-    background-color: var(--primary-color);
-    color: var(--dark-bg);
+    background-color: var(--secondary-accent-bg); /* Brighter pink number bg */
+    color: var(--base-text-color); /* Dark text on pink */
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -675,15 +733,17 @@ nav a:hover, nav a:focus {
 }
 
 .recommendation h3 {
-    color: var(--primary-color);
+    color: var(--highlight-text-color); /* Mauve title */
     margin-bottom: 10px;
 }
 
-/* Footer */
+/* Footer (CORRECTED BACKGROUND) */
 footer {
-    background-color: var(--dark-bg);
-    color: var(--light-text);
+    background-color: var(--light-bg-solid); /* Use off-white solid background */
+    color: var(--base-text-color);
     padding: 40px 0 20px;
+    border-top: 1px solid var(--border-color); /* Dark top border */
+    margin-top: 40px;
 }
 
 .footer-content {
@@ -694,16 +754,28 @@ footer {
 }
 
 .footer-col h3 {
-    color: var(--primary-color);
+    color: var(--base-text-color); /* Dark footer headers */
+    font-weight: 600;
     margin-bottom: 15px;
+}
+
+.footer-col li, .footer-col p, .footer-col a {
+     color: var(--base-text-color);
+     opacity: 0.8;
+}
+.footer-col a:hover {
+    color: var(--base-text-color);
+    opacity: 1;
+    text-decoration: underline;
 }
 
 .copyright {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid rgba(34, 33, 33, 0.3); /* Dark border, slightly transparent */
     font-size: 0.9rem;
-    opacity: 0.8;
+    opacity: 0.7;
+    color: var(--base-text-color);
 }
 
 /* Responsive Design */
@@ -712,83 +784,109 @@ footer {
     .cost-overview {
         grid-template-columns: 1fr;
     }
-    
+
     .chart-row {
         grid-template-columns: 1fr;
     }
-    
+
     .key-metrics {
         gap: 15px;
     }
-    
+
     .metric {
         min-width: 150px;
     }
-    
+
     .chart-container {
         min-height: 250px;
+    }
+     .section-light, .section-dark {
+        padding: 30px 0;
     }
 }
 
 @media (max-width: 768px) {
     header .container {
         flex-direction: column;
+        text-align: center; /* Center logo/tagline */
     }
-    
+    .logo {
+        margin-bottom: 10px;
+    }
+
     nav {
         margin-top: 15px;
     }
-    
+
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
+        padding-left: 0; /* Remove default padding */
     }
-    
+
     nav li {
         margin: 5px 10px;
     }
-    
+
     .subscription-tiers {
         flex-direction: column;
     }
-    
+
     h2 {
         font-size: 1.8rem;
     }
-    
+
     #hero h2 {
         font-size: 2rem;
     }
-    
+
     .commission-item .label,
     .commission-item .value,
     .commission-item .note {
         width: 100%;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+        text-align: center;
     }
-    
+     .commission-item .label {
+         margin-bottom: 2px;
+    }
+     .commission-item .value {
+         margin-bottom: 5px;
+         font-size: 1.3rem;
+    }
+
     .chart-container {
         min-height: 220px;
     }
-    
+
     .section-light, .section-dark {
-        padding: 30px 0;
+        padding: 30px 0; /* Reduce padding on smaller screens */
+        border-radius: 0; /* Optional: remove radius on mobile? */
+        margin-bottom: 20px;
     }
 }
 
 @media (max-width: 576px) {
     .metric {
         width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
     }
-    
+
     .key-metrics {
         flex-direction: column;
-        max-width: 250px;
+        align-items: center;
+        max-width: 300px;
         margin: 40px auto 0;
     }
-    
-    .data-table {
-        font-size: 0.9rem;
+
+    .data-table, .cost-category table {
+        font-size: 0.85rem;
+    }
+    .data-table th, .data-table td,
+    .cost-category table th, .cost-category table td {
+        padding: 8px 10px;
     }
 }
 
@@ -807,21 +905,24 @@ footer {
     max-height: 300px;
     object-fit: contain;
     display: block;
+    background-color: rgba(0, 0, 0, 0.064); /* Add slight bg for transparent images */
+    border: 1px solid #eee;
+    border-radius: 4px;
 }
 
 .static-chart-overlay {
     position: absolute;
     bottom: 5px;
     right: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #eee;
     padding: 2px 6px;
     border-radius: 3px;
     font-size: 10px;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
-/* Toggle Switch Styles */
+/* Toggle Switch Styles (CORRECTED SLIDER BG) */
 .chart-mode-toggle {
     display: flex;
     align-items: center;
@@ -832,6 +933,8 @@ footer {
     margin-left: 8px;
     font-size: 0.85rem;
     white-space: nowrap;
+    color: var(--base-text-color);
+    opacity: 0.9;
 }
 
 .switch {
@@ -854,7 +957,7 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: rgba(34, 33, 33, 0.2); /* Muted dark 'off' state */
     transition: .4s;
 }
 
@@ -870,11 +973,11 @@ footer {
 }
 
 input:checked + .slider {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-accent-bg); /* Use brighter pink for active toggle */
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px var(--primary-color);
+    box-shadow: 0 0 1px var(--secondary-accent-bg);
 }
 
 input:checked + .slider:before {
@@ -896,9 +999,19 @@ input:checked + .slider:before {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
-    /* Make tables more responsive */
-    .data-table {
+
+    .data-table, .cost-category table {
         font-size: 0.95rem;
     }
-} 
+}
+
+/* Apply border style to all section tags */
+section {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* END OF COMPLETE UPDATED FILE styles.css */

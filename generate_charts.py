@@ -54,9 +54,10 @@ def format_currency(value):
 
 # 1. Overview Chart
 def create_overview_chart():
-    years = ['Year 1', 'Year 2', 'Year 3']
-    subscription_revenue = [10873, 72375, 240250]
-    commission_revenue = [12253, 100000, 340000]
+    years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
+    # Estimated split based on HTML totals: Y1=10k, Y2=95k, Y3=185k, Y4=390k, Y5=500k
+    subscription_revenue = [4000, 50000, 100000, 210000, 270000]
+    commission_revenue = [6000, 45000, 85000, 180000, 230000]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
     
@@ -70,20 +71,23 @@ def create_overview_chart():
     # Add total text on top of bars
     for i, (sub, comm) in enumerate(zip(subscription_revenue, commission_revenue)):
         total = sub + comm
-        ax.text(i, total + 5000, format_currency(total), ha='center', fontsize=10, fontweight='bold')
+        ax.text(i, total + 5000, format_currency(total), ha='center', fontsize=10, fontweight='bold', color='black')
     
-    ax.set_xlabel('Year', fontweight='bold')
-    ax.set_ylabel('Revenue', fontweight='bold')
-    ax.set_title('Revenue Growth by Year', fontsize=14, fontweight='bold')
+    ax.set_xlabel('Year', fontweight='bold', color='black')
+    ax.set_ylabel('Revenue', fontweight='bold', color='black')
+    ax.set_title('Revenue Growth by Year', fontsize=14, fontweight='bold', color='black')
     ax.set_xticks(x)
-    ax.set_xticklabels(years)
+    ax.set_xticklabels(years, color='black')
     
     # Format y-axis labels as currency
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: format_currency(x)))
+    ax.tick_params(colors='black')
     
     ax.legend()
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_color('black')
     
     # Add grid lines
     ax.grid(axis='y', linestyle='--', alpha=0.3)
@@ -95,14 +99,11 @@ def create_overview_chart():
 
 # 2. Tickets Chart
 def create_tickets_chart():
-    years = ['Year 1', 'Year 2', 'Year 3']
-    tickets_sold = [5000, 25000, 75000]
+    years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
+    # Updated from HTML: Y1=3.75k, Y2=32.5k, Y3=95k, Y4=180k, Y5=275k
+    tickets_sold = [3750, 32500, 95000, 180000, 275000]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set dark background to match website's dark section
-    fig.patch.set_facecolor('#181818')
-    ax.set_facecolor('#181818')
     
     # Create line chart with area fill
     ax.plot(years, tickets_sold, marker='o', markersize=8, linewidth=3, 
@@ -111,25 +112,25 @@ def create_tickets_chart():
     # Fill area under line
     ax.fill_between(years, tickets_sold, alpha=0.3, color=colors['secondary'])
     
-    # Add data labels with white text
+    # Add data labels
     for i, value in enumerate(tickets_sold):
-        ax.text(i, value + 2000, f"{value:,}", ha='center', fontsize=10, fontweight='bold', color='white')
+        ax.text(i, value + (value * 0.05), f"{value:,}", ha='center', fontsize=10, fontweight='bold', color='black')
     
-    ax.set_xlabel('Year', fontweight='bold', color='white')
-    ax.set_ylabel('Tickets Sold', fontweight='bold', color='white')
-    ax.set_title('Tickets Sold Projection', fontsize=14, fontweight='bold', color='white')
+    ax.set_xlabel('Year', fontweight='bold', color='black')
+    ax.set_ylabel('Tickets Sold', fontweight='bold', color='black')
+    ax.set_title('Tickets Sold Projection', fontsize=14, fontweight='bold', color='black')
     
     # Remove top and right spines
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('white')
-    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_color('black')
     
-    # Add grid lines in white
-    ax.grid(axis='y', linestyle='--', alpha=0.3, color='white')
+    # Add grid lines
+    ax.grid(axis='y', linestyle='--', alpha=0.3)
     
-    # Set tick colors to white
-    ax.tick_params(colors='white')
+    # Set tick colors to black
+    ax.tick_params(colors='black')
     
     plt.tight_layout()
     plt.savefig('images/charts/tickets-chart.png', bbox_inches='tight', transparent=True)
@@ -138,15 +139,14 @@ def create_tickets_chart():
 
 # 3. User Growth Chart
 def create_user_growth_chart():
-    years = ['Year 1', 'Year 2', 'Year 3']
-    active_users = [2000, 12500, 40000]
-    paid_subscribers = [200, 1875, 8000]
+    years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
+    # Updated from HTML Overview: Y1=750, Y2=5k, Y3=10k, Y4=18k, Y5=25k (continued growth)
+    active_users = [750, 5000, 10000, 18000, 25000]
+    # Calculated based on progression to 25% conversion by Y5
+    # HTML conversion %: Y1=8% -> 60, Y2=13% -> 650, Y3=15% -> 1500, Y4=20% -> 3600, Y5=25% -> 6250
+    paid_subscribers = [60, 650, 1500, 3600, 6250]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set light background to match website's light section
-    fig.patch.set_facecolor('#f4f4f4')
-    ax.set_facecolor('#f4f4f4')
     
     # Create lines
     ax.plot(years, active_users, marker='o', markersize=8, linewidth=3, 
@@ -159,24 +159,30 @@ def create_user_growth_chart():
     
     # Add value labels with black text
     for i, value in enumerate(active_users):
-        ax.text(i, value + 1000, f"{value:,}", ha='center', fontsize=10, fontweight='bold', color=colors['dark_text'])
+        ax.text(i, value + (value * 0.05), f"{value:,}", ha='center', fontsize=10, fontweight='bold', color='black')
         
     for i, value in enumerate(paid_subscribers):
-        ax.text(i, value + 800, f"{value:,}", ha='center', fontsize=10, fontweight='bold', color=colors['dark_text'])
+        if value > 0:  # Only add label if value is greater than zero
+            ax.text(i, value + (value * 0.1), f"{value:,}", ha='center', fontsize=10, fontweight='bold', color='black')
     
-    ax.set_xlabel('Year', fontweight='bold', color=colors['dark_text'])
-    ax.set_ylabel('Number of Users', fontweight='bold', color=colors['dark_text'])
-    ax.set_title('User Growth Projection', fontsize=14, fontweight='bold', color=colors['dark_text'])
+    ax.set_xlabel('Year', fontweight='bold', color='black')
+    ax.set_ylabel('Number of Users', fontweight='bold', color='black')
+    ax.set_title('User Growth Projection', fontsize=14, fontweight='bold', color='black')
     
     # Remove top and right spines
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_color('black')
     
     # Set y-axis formatter to show K for thousands
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: f'{x/1000:.0f}K' if x >= 1000 else f'{x:.0f}'))
     
     # Add grid lines
     ax.grid(axis='y', linestyle='--', alpha=0.3)
+    
+    # Set tick colors to black
+    ax.tick_params(colors='black')
     
     ax.legend(loc='upper left')
     
@@ -188,7 +194,8 @@ def create_user_growth_chart():
 # 4. Cost Breakdown Chart
 def create_cost_breakdown_chart():
     labels = ['Development & Technical', 'Marketing & User Acquisition', 'Operational Overheads']
-    costs = [295000, 170000, 269000]
+    # Updated Y1 costs from HTML detailed tables
+    costs = [61000, 12000, 22800]
     
     # Calculate percentages
     total = sum(costs)
@@ -199,9 +206,6 @@ def create_cost_breakdown_chart():
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
     
-    # Set dark background for the figure to match the website's dark section
-    fig.patch.set_facecolor('#181818')
-    ax.set_facecolor('#181818')
     
     # Create donut chart
     wedges, texts, autotexts = ax.pie(
@@ -211,7 +215,7 @@ def create_cost_breakdown_chart():
         colors=chart_colors,
         wedgeprops=dict(width=0.5),  # Make it a donut
         startangle=90,
-        textprops={'fontsize': 12, 'weight': 'bold', 'color': 'white'}
+        textprops={'fontsize': 12, 'weight': 'bold', 'color': 'black'}
     )
     
     # Equal aspect ratio ensures circular pie
@@ -223,9 +227,9 @@ def create_cost_breakdown_chart():
     
     # Set legend text color to white for visibility on dark background
     for text in legend.get_texts():
-        text.set_color('white')
+        text.set_color('black')
     
-    plt.title('Cost Breakdown - Year 1', fontsize=14, fontweight='bold', color='white')
+    plt.title('Cost Breakdown - Year 1', fontsize=14, fontweight='bold', color='black')
     
     plt.tight_layout()
     plt.savefig('images/charts/cost-breakdown-chart.png', bbox_inches='tight', transparent=True)
@@ -245,10 +249,6 @@ def create_pre_seed_chart():
     chart_colors = [colors['primary'], colors['secondary'], colors['success'], colors['warning']]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set background color to match light section
-    fig.patch.set_facecolor('#f4f4f4')
-    ax.set_facecolor('#f4f4f4')
     
     # Create pie chart
     wedges, texts, autotexts = ax.pie(
@@ -288,9 +288,6 @@ def create_series_a_chart():
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
     
-    # Set background color to match light section
-    fig.patch.set_facecolor('#f4f4f4')
-    ax.set_facecolor('#f4f4f4')
     
     # Create pie chart
     wedges, texts, autotexts = ax.pie(
@@ -322,6 +319,7 @@ def create_break_even_chart():
     months = [f"Month {i+1}" for i in range(36)]
     month_numbers = list(range(1, 37))
     
+    # NOTE: Keeping old monthly data shape, but break-even point shifted
     # Simplified monthly revenue and costs data
     monthly_revenue = [
         # Year 1 (months 1-12)
@@ -333,20 +331,16 @@ def create_break_even_chart():
     ]
     
     monthly_costs = [
-        # Year 1 (months 1-12)
-        61167, 61167, 61167, 61167, 61167, 61167, 61167, 61167, 61167, 61167, 61167, 61167,
-        # Year 2 (months 13-24)
-        86667, 86667, 86667, 86667, 86667, 86667, 86667, 86667, 86667, 86667, 86667, 86667,
-        # Year 3 (months 25-36)
-        144417, 144417, 144417, 144417, 144417, 144417, 144417, 144417, 144417, 144417, 144417, 144417
+        # Year 1 (months 1-12) - Scaled down roughly based on new Y1 total cost
+        8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000, 8000,
+        # Year 2 (months 13-24) - Scaled down roughly based on new Y2 total cost
+        12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500,
+        # Year 3 (months 25-36) - Scaled up roughly based on new Y3 total cost
+        32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000, 32000
     ]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set light background for the chart
-    fig.patch.set_facecolor('#f4f4f4')
-    ax.set_facecolor('#f4f4f4')
-    
+        
     # Create lines
     ax.plot(month_numbers, monthly_revenue, marker='', linewidth=2.5, 
             color=colors['success'], label='Monthly Revenue')
@@ -354,14 +348,15 @@ def create_break_even_chart():
     ax.plot(month_numbers, monthly_costs, marker='', linewidth=2.5, 
             color=colors['danger'], label='Monthly Costs', linestyle='dashed')
     
-    # Add break-even marker (around month 32)
-    break_even_month = 32
-    break_even_value = monthly_revenue[break_even_month-1]
+    # Add break-even marker (Updated to month 36)
+    break_even_month = 36
+    # Estimate break_even_value visually near intersection around month 36
+    break_even_value = 22000 # Based on HTML text
     
     # Add vertical line at break-even point
     ax.axvline(x=break_even_month, color=colors['warning'], linestyle='-', linewidth=2, alpha=0.7)
-    ax.text(break_even_month+0.5, break_even_value+15000, 'Break-Even\nMonth 32', 
-            fontsize=10, fontweight='bold', color=colors['warning'])
+    ax.text(break_even_month - 0.5, break_even_value + 5000, 'Break-Even\nMonth 36+', 
+            fontsize=10, fontweight='bold', color=colors['warning'], ha='right')
     
     # Add markers for Year boundaries
     for year, month in [(1, 1), (2, 13), (3, 25)]:
@@ -396,14 +391,11 @@ def create_break_even_chart():
 
 # 8. ARPU Chart
 def create_arpu_chart():
-    years = ['Year 1', 'Year 2', 'Year 3']
-    arpu_values = [0.85, 1.15, 1.45]
+    years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
+    # Updated from HTML KPIs: Y1=2.04, Y2=1.35, Y3=1.75, Y4=2.10, Y5=5.67
+    arpu_values = [2.04, 1.35, 1.75, 2.10, 5.67]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set dark background to match website's dark section
-    fig.patch.set_facecolor('#181818')
-    ax.set_facecolor('#181818')
     
     # Create bar chart
     bars = ax.bar(years, arpu_values, color=colors['primary'], width=0.5)
@@ -413,24 +405,24 @@ def create_arpu_chart():
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2., height + 0.05,
                 f'€{height:.2f}',
-                ha='center', va='bottom', fontsize=11, fontweight='bold', color='white')
+                ha='center', va='bottom', fontsize=11, fontweight='bold', color='black')
     
-    ax.set_xlabel('Year', fontweight='bold', color='white')
-    ax.set_ylabel('Average Revenue Per User (€)', fontweight='bold', color='white')
-    ax.set_title('ARPU Growth', fontsize=14, fontweight='bold', color='white')
+    ax.set_xlabel('Year', fontweight='bold', color='black')
+    ax.set_ylabel('Average Revenue Per User (€)', fontweight='bold', color='black')
+    ax.set_title('ARPU Growth', fontsize=14, fontweight='bold', color='black')
     
     # Format y-axis labels with Euro symbol
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: f'€{x:.2f}'))
-    ax.tick_params(colors='white')
+    ax.tick_params(colors='black')
     
     # Remove top and right spines
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('white')
-    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_color('black')
     
     # Add grid lines
-    ax.grid(axis='y', linestyle='--', alpha=0.3, color='white')
+    ax.grid(axis='y', linestyle='--', alpha=0.3)
     
     plt.tight_layout()
     plt.savefig('images/charts/arpu-chart.png', bbox_inches='tight', transparent=True)
@@ -439,18 +431,15 @@ def create_arpu_chart():
 
 # 9. CLV vs CAC Chart
 def create_clv_cac_chart():
-    years = ['Year 1', 'Year 2', 'Year 3']
-    clv_values = [15, 24, 32]
-    cac_values = [8, 7, 6.5]
+    years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
+    # Updated from HTML KPIs (CLV) and User Growth (CAC)
+    clv_values = [37.20, 28.35, 38.50, 52.50, 156.00]
+    cac_values = [16.00, 7.00, 6.50, 3.60, 3.30]
     
     # Calculate ratio for each year
     ratios = [clv/cac for clv, cac in zip(clv_values, cac_values)]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set dark background to match website's dark section
-    fig.patch.set_facecolor('#181818')
-    ax.set_facecolor('#181818')
     
     x = np.arange(len(years))
     width = 0.35
@@ -463,43 +452,47 @@ def create_clv_cac_chart():
     for bar in bars1:
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2., height + 0.5,
-                f'€{height:.1f}', ha='center', va='bottom', fontsize=10, fontweight='bold', color='white')
+                f'€{height:.1f}', ha='center', va='bottom', fontsize=10, fontweight='bold', color='black')
     
     for bar in bars2:
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2., height + 0.5,
-                f'€{height:.1f}', ha='center', va='bottom', fontsize=10, fontweight='bold', color='white')
+                f'€{height:.1f}', ha='center', va='bottom', fontsize=10, fontweight='bold', color='black')
     
-    # Add ratio text
+    # Add ratio text in middle instead of at the top
     for i, ratio in enumerate(ratios):
-        ax.text(i, max(clv_values[i], cac_values[i]) + 3, 
-                f'Ratio: {ratio:.1f}x', 
-                ha='center', fontsize=11, fontweight='bold', color='white')
+        mid_point_x = i
+        mid_point_y = (clv_values[i] + cac_values[i]) / 2  # Middle point between the two bars
+        
+        # Create a small white background for better readability
+        ax.text(mid_point_x, mid_point_y, f' {ratio:.1f}x ', 
+                ha='center', va='center', fontsize=11, fontweight='bold', color='black',
+                bbox=dict(facecolor='black', alpha=0.7, edgecolor='none', pad=3))
     
-    ax.set_xlabel('Year', fontweight='bold', color='white')
-    ax.set_ylabel('Amount (€)', fontweight='bold', color='white')
-    ax.set_title('CLV vs CAC Comparison', fontsize=14, fontweight='bold', color='white')
+    ax.set_xlabel('Year', fontweight='bold', color='black')
+    ax.set_ylabel('Amount (€)', fontweight='bold', color='black')
+    ax.set_title('CLV vs CAC Comparison', fontsize=14, fontweight='bold', color='black')
     
     ax.set_xticks(x)
     ax.set_xticklabels(years)
+    ax.tick_params(colors='black')
     
     # Format y-axis with Euro symbol
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: f'€{x:.0f}'))
-    ax.tick_params(colors='white')
     
     # Remove top and right spines
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('white')
-    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_color('black')
     
     # Add grid lines
-    ax.grid(axis='y', linestyle='--', alpha=0.3, color='white')
+    ax.grid(axis='y', linestyle='--', alpha=0.3)
     
-    # Set legend text color to white
+    # Set legend text color to black
     legend = ax.legend()
     for text in legend.get_texts():
-        text.set_color('white')
+        text.set_color('black')
     
     plt.tight_layout()
     plt.savefig('images/charts/clv-cac-chart.png', bbox_inches='tight', transparent=True)
@@ -508,14 +501,11 @@ def create_clv_cac_chart():
 
 # 10. Retention Chart
 def create_retention_chart():
-    years = ['Year 1', 'Year 2', 'Year 3']
-    retention_rates = [60, 70, 75]
+    years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
+    # Updated from HTML KPIs: Y1=65%, Y2=72%, Y3=77%, Y4=80%, Y5=82%
+    retention_rates = [65, 72, 77, 80, 82]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set dark background to match website's dark section
-    fig.patch.set_facecolor('#181818')
-    ax.set_facecolor('#181818')
     
     # Create line chart with area fill
     ax.plot(years, retention_rates, marker='o', markersize=8, linewidth=3, 
@@ -526,27 +516,27 @@ def create_retention_chart():
     
     # Add data labels
     for i, value in enumerate(retention_rates):
-        ax.text(i, value + 1, f"{value}%", ha='center', fontsize=11, fontweight='bold', color='white')
+        ax.text(i, value + 1, f"{value}%", ha='center', fontsize=11, fontweight='bold', color='black')
     
-    ax.set_xlabel('Year', fontweight='bold', color='white')
-    ax.set_ylabel('Retention Rate (%)', fontweight='bold', color='white')
-    ax.set_title('User Retention Rate Projection', fontsize=14, fontweight='bold', color='white')
+    ax.set_xlabel('Year', fontweight='bold', color='black')
+    ax.set_ylabel('Retention Rate (%)', fontweight='bold', color='black')
+    ax.set_title('User Retention Rate Projection', fontsize=14, fontweight='bold', color='black')
     
     # Set y-axis range from 0 to 100 for percentage
     ax.set_ylim(0, 100)
     
-    # Format y-axis with percentage and white ticks for visibility
+    # Format y-axis with percentage and black ticks for visibility
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: f'{x:.0f}%'))
-    ax.tick_params(colors='white')
+    ax.tick_params(colors='black')
     
     # Remove top and right spines
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('white')
-    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_color('black')
     
     # Add grid lines
-    ax.grid(axis='y', linestyle='--', alpha=0.3, color='white')
+    ax.grid(axis='y', linestyle='--', alpha=0.3)
     
     plt.tight_layout()
     plt.savefig('images/charts/retention-chart.png', bbox_inches='tight', transparent=True)
@@ -555,14 +545,11 @@ def create_retention_chart():
 
 # 11. MRR Chart
 def create_mrr_chart():
-    years = ['Year 1', 'Year 2', 'Year 3']
-    mrr_values = [1750, 12000, 48000]
+    years = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
+    # Updated from HTML KPIs: Y1=1.5k, Y2=14.3k, Y3=40.4k, Y4=81.8k, Y5=102k
+    mrr_values = [1532, 14285, 40396, 81750, 102000]
     
     fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT), dpi=DPI)
-    
-    # Set dark background to match website's dark section
-    fig.patch.set_facecolor('#181818')
-    ax.set_facecolor('#181818')
     
     # Create line chart with area fill
     ax.plot(years, mrr_values, marker='o', markersize=8, linewidth=3, 
@@ -574,24 +561,24 @@ def create_mrr_chart():
     # Add data labels
     for i, value in enumerate(mrr_values):
         ax.text(i, value + (value * 0.05), format_currency(value), 
-                ha='center', fontsize=11, fontweight='bold', color='white')
+                ha='center', fontsize=11, fontweight='bold', color='black')
     
-    ax.set_xlabel('Year', fontweight='bold', color='white')
-    ax.set_ylabel('Monthly Recurring Revenue', fontweight='bold', color='white')
-    ax.set_title('MRR Growth Projection', fontsize=14, fontweight='bold', color='white')
+    ax.set_xlabel('Year', fontweight='bold', color='black')
+    ax.set_ylabel('Monthly Recurring Revenue', fontweight='bold', color='black')
+    ax.set_title('MRR Growth Projection', fontsize=14, fontweight='bold', color='black')
     
-    # Format y-axis as currency with white ticks for visibility
+    # Format y-axis as currency with black ticks for visibility
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: format_currency(x)))
-    ax.tick_params(colors='white')
+    ax.tick_params(colors='black')
     
     # Remove top and right spines
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('white')
-    ax.spines['left'].set_color('white')
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_color('black')
     
     # Add grid lines
-    ax.grid(axis='y', linestyle='--', alpha=0.3, color='white')
+    ax.grid(axis='y', linestyle='--', alpha=0.3)
     
     plt.tight_layout()
     plt.savefig('images/charts/mrr-chart.png', bbox_inches='tight', transparent=True)
@@ -601,7 +588,9 @@ def create_mrr_chart():
 # 12. Scenario Chart
 def create_scenario_chart():
     scenarios = ['Base Case', 'Optimistic', 'Conservative', 'Pessimistic']
-    revenues = [580250, 812350, 435188, 319138]
+    # Updated Base Case to match Y3 Revenue from HTML overview (€185k)
+    # Kept relative differences for other scenarios similar to original script
+    revenues = [185000, 259000, 138750, 101750]
     
     # Define colors for each scenario
     scenario_colors = [colors['primary'], colors['success'], colors['warning'], colors['danger']]
